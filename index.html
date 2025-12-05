@@ -11,27 +11,32 @@
         body {
             font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, Arial, sans-serif;
             line-height: 1.8;
+            /* 深邃宇宙银河背景：多层星云光晕+暗色空间 */
             background:
-                radial-gradient(circle at 5% 0%, #111827 0, #020617 55%, #000000 100%),
-                radial-gradient(circle at 95% 20%, #020617 0, #020617 40%, #000000 100%);
+                radial-gradient(circle at 10% -10%, #1d4ed8 0, rgba(15,23,42,0.1) 38%, transparent 55%),
+                radial-gradient(circle at 90% 0%, #7c3aed 0, rgba(15,23,42,0.15) 40%, transparent 58%),
+                radial-gradient(circle at 18% 65%, #0ea5e9 0, rgba(15,23,42,0.18) 42%, transparent 60%),
+                radial-gradient(circle at 82% 75%, #22c55e1c 0, rgba(15,23,42,0.16) 40%, transparent 62%),
+                radial-gradient(circle at 50% 120%, #020617 0, #020617 45%, #020617 70%, #000000 92%);
             color: #e5e7eb;
             position: relative;
             overflow-x: hidden;
         }
 
-        /* 更克制的“星空噪点”层 */
+        /* 轻微星空噪点层 + 一点蓝紫色星尘 */
         body::before {
             content: "";
             position: fixed;
             inset: 0;
             pointer-events: none;
             background-image:
-                radial-gradient(#ffffff17 1px, transparent 1px),
-                radial-gradient(#ffffff0a 1px, transparent 1px);
-            background-size: 180px 180px, 260px 260px;
-            background-position: 0 0, 80px 120px;
+                radial-gradient(#ffffff1a 1px, transparent 1px),
+                radial-gradient(#60a5fa19 1px, transparent 1px),
+                radial-gradient(#a855f719 1px, transparent 1px);
+            background-size: 180px 180px, 260px 260px, 220px 220px;
+            background-position: 0 0, 80px 120px, 40px 200px;
             mix-blend-mode: screen;
-            opacity: 0.28;
+            opacity: 0.32;
             z-index: -1;
         }
 
@@ -60,7 +65,7 @@
             z-index: 1000;
             transition: transform 0.25s ease, opacity 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
             border-radius: 0 0 18px 18px;
-            background: rgba(10, 15, 25, 0.96);
+            background: rgba(6, 10, 25, 0.96);
             box-shadow:
                 0 18px 60px rgba(0,0,0,0.9),
                 0 0 0 1px rgba(31,41,55,0.8);
@@ -108,7 +113,7 @@
             height: 34px;
             border-radius: 12px;
             background:
-                radial-gradient(circle at 20% 0%, #f9fafb 0, #020617 55%, #000000 100%);
+                radial-gradient(circle at 20% 0%, #f9fafb 0, #1f2937 45%, #020617 70%, #000000 100%);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -128,9 +133,9 @@
             border-radius: inherit;
             background:
                 linear-gradient(135deg,
-                    rgba(249,250,251,0.22),
+                    rgba(249,250,251,0.28),
                     rgba(15,23,42,1),
-                    rgba(156,163,175,0.3));
+                    rgba(129,140,248,0.35));
             mix-blend-mode: soft-light;
             opacity: 0.95;
         }
@@ -333,7 +338,7 @@
             }
             100% {
                 box-shadow: 0 0 0 0 rgba(249,250,251,0);
-                outline: 0 solid rgba(249,250,251,0);
+                outline: 0 solidrgba(249,250,251,0);
             }
         }
 
@@ -472,7 +477,7 @@
                 margin-top: 10px;
                 flex-direction: column;
                 gap: 10px;
-                background: rgba(10,15,25,0.98);
+                background: rgba(6,10,25,0.98);
                 padding: 10px 14px;
                 border-radius: 14px;
                 box-shadow:
