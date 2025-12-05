@@ -23,7 +23,7 @@
             overflow-x: hidden;
         }
 
-        /* 星空噪点 + 蓝紫星尘，整体亮度降低一点 */
+        /* 星空噪点 + 蓝紫星尘 */
         body::before {
             content: "";
             position: fixed;
@@ -38,6 +38,27 @@
             mix-blend-mode: screen;
             opacity: 0.24;
             z-index: -1;
+        }
+
+        /* 额外一层“银河带” */
+        body::after {
+            content: "";
+            position: fixed;
+            inset: -30%;
+            pointer-events: none;
+            background:
+                conic-gradient(
+                    from 210deg,
+                    rgba(15,23,42,0) 0deg,
+                    rgba(96,165,250,0.18) 40deg,
+                    rgba(129,140,248,0.28) 80deg,
+                    rgba(236,72,153,0.12) 120deg,
+                    rgba(15,23,42,0) 180deg,
+                    rgba(15,23,42,0) 360deg
+                );
+            opacity: 0.18;
+            mix-blend-mode: screen;
+            z-index: -2;
         }
 
         .page {
@@ -107,7 +128,7 @@
             gap: 12px;
         }
 
-        /* RC 图标：金属块 + 流星掠过，细腻一点 */
+        /* RC 图标：金属块 + 流星掠过 */
         .brand-logo {
             position: relative;
             width: 36px;
@@ -220,7 +241,7 @@
             color: #cbd5f5;
         }
 
-        /* 桌面导航：更金属、冷光一点 */
+        /* 桌面导航：金属冷光 */
         .nav-links {
             display: flex;
             gap: 32px;
@@ -302,7 +323,7 @@
             display: flex;
         }
 
-        /* Hero：中间暗一层，文字更清晰 */
+        /* Hero：中间压暗一层，文字更清晰 */
         .hero {
             position: relative;
             padding: 92px 0 80px;
@@ -385,8 +406,6 @@
             border-bottom: none;
         }
 
-        /* 已移除原来“边框闪烁”的高亮动画 */
-
         .section-headline {
             margin-bottom: 18px;
         }
@@ -413,6 +432,40 @@
 
         .section-body p + p {
             margin-top: 10px;
+        }
+
+        /* 点击导航后，板块顶部划过“流星” */
+        .section-meteor::after {
+            content: "";
+            position: absolute;
+            top: 12px;
+            left: -25%;
+            width: 160px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #e5e7eb, #a5b4fc, transparent);
+            opacity: 0;
+            transform: rotate(-10deg) translate3d(0,0,0);
+            pointer-events: none;
+            animation: sectionMeteor 1s ease-out forwards;
+        }
+
+        @keyframes sectionMeteor {
+            0% {
+                opacity: 0;
+                left: -25%;
+            }
+            15% {
+                opacity: 1;
+                left: 0%;
+            }
+            55% {
+                opacity: 1;
+                left: 60%;
+            }
+            100% {
+                opacity: 0;
+                left: 115%;
+            }
         }
 
         /* 业务板块布局：两列展开 */
@@ -716,7 +769,7 @@
 </div>
 
 <script>
-    // 顶部导航：下滑隐藏，上滑显示；鼠标到顶部也显示；手机端菜单开关
+    // 顶部导航：下滑隐藏，上滑显示；鼠标到顶部也显示；手机端菜单开关 + 导航点击触发“流星”效果
     (function() {
         var topbar = document.getElementById('topbar');
         var lastScrollY = window.scrollY;
@@ -753,7 +806,31 @@
 
         if (navLinks) {
             navLinks.addEventListener('click', function(e) {
-                if (e.target.tagName.toLowerCase() === 'a') {
+                var target = e.target;
+                if (target.tagName.toLowerCase() === 'a') {
+                    var href = target.getAttribute('href');
+                    if (href && href.charAt(0) === '#') {
+                        e.preventDefault();
+
+                        var section = document.querySelector(href);
+                        if (section) {
+                            // 平滑滚动到对应版块
+                            var y = section.getBoundingClientRect().top + window.scrollY - 110;
+                            window.scrollTo({ top: y, behavior: 'smooth' });
+
+                            // 触发“流星”动画：先移除，再强制重绘，再添加 class
+                            section.classList.remove('section-meteor');
+                            void section.offsetWidth;
+                            section.classList.add('section-meteor');
+
+                            // 1 秒后移除 class，方便下次重复触发
+                            setTimeout(function () {
+                                section.classList.remove('section-meteor');
+                            }, 1100);
+                        }
+                    }
+
+                    // 点击导航项时，自动收起手机菜单
                     topbar.classList.remove('menu-open');
                 }
             });
