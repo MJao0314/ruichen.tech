@@ -12,10 +12,27 @@
             font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, Arial, sans-serif;
             line-height: 1.8;
             background:
-                radial-gradient(circle at 10% 0%, #020617 0, #020617 32%, #020617 40%, #020617 48%, #020617 100%),
-                radial-gradient(circle at 90% 0%, #020617 0, #020617 40%, #020617 52%, #020617 100%),
-                radial-gradient(circle at 50% 120%, #020617 0, #020617 40%, #020617 100%);
+                radial-gradient(circle at 10% 0%, #111827 0, #020617 55%, #000000 100%),
+                radial-gradient(circle at 90% 20%, #020617 0, #020617 40%, #000000 100%);
             color: #e5e7eb;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* 轻微星空噪点层 */
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            background-image:
+                radial-gradient(#ffffff1a 1px, transparent 1px),
+                radial-gradient(#ffffff0f 1px, transparent 1px);
+            background-size: 140px 140px, 220px 220px;
+            background-position: 0 0, 60px 80px;
+            mix-blend-mode: screen;
+            opacity: 0.45;
+            z-index: -1;
         }
 
         .page {
@@ -43,8 +60,7 @@
             z-index: 1000;
             transition: transform 0.25s ease, opacity 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
             border-radius: 0 0 18px 18px;
-            background:
-                linear-gradient(135deg, rgba(15,23,42,0.98), rgba(15,23,42,0.98));
+            background: rgba(10, 15, 25, 0.96);
             box-shadow:
                 0 16px 48px rgba(0,0,0,0.85),
                 0 0 0 1px rgba(31,41,55,0.9);
@@ -60,7 +76,7 @@
                 rgba(148,163,184,0.3),
                 rgba(15,23,42,0),
                 rgba(15,23,42,0),
-                rgba(30,64,175,0.35));
+                rgba(148,163,184,0.25));
             opacity: 0.4;
             mix-blend-mode: screen;
             pointer-events: none;
@@ -92,13 +108,13 @@
             height: 34px;
             border-radius: 12px;
             background:
-                radial-gradient(circle at 20% 0%, #f97316 0, #0f172a 45%, #020617 100%);
+                radial-gradient(circle at 20% 0%, #f9fafb 0, #020617 55%, #000000 100%);
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 16px;
             font-weight: 600;
-            color: #e5e7eb;
+            color: #f9fafb;
             box-shadow:
                 0 16px 40px rgba(0,0,0,0.9),
                 0 0 0 1px rgba(148,163,184,0.7);
@@ -111,12 +127,12 @@
             inset: 2px;
             border-radius: inherit;
             background:
-                linear-gradient(145deg,
+                linear-gradient(135deg,
+                    rgba(249,250,251,0.16),
                     rgba(15,23,42,1),
-                    rgba(148,163,184,0.35),
-                    rgba(15,23,42,1));
+                    rgba(156,163,175,0.25));
             mix-blend-mode: soft-light;
-            opacity: 0.75;
+            opacity: 0.9;
         }
 
         .brand-logo span {
@@ -161,7 +177,7 @@
             bottom: -3px;
             width: 0;
             height: 1px;
-            background: linear-gradient(90deg, #38bdf8, #facc6b);
+            background: linear-gradient(90deg, #ffffff, #9ca3af);
             transition: width 0.24s ease;
         }
 
@@ -218,48 +234,40 @@
             display: flex;
         }
 
-        /* 顶部 Hero：整页铺开的一段，不做卡片 */
+        /* Hero：简洁版，居中一块 */
         .hero {
-            padding: 42px 0 56px;
+            padding: 56px 0 64px;
             border-bottom: 1px solid rgba(31,41,55,0.9);
         }
 
-        .hero-grid {
-            display: grid;
-            grid-template-columns: minmax(0, 3.2fr) minmax(0, 2.3fr);
-            gap: 42px;
-            align-items: center;
-        }
-
-        .hero-kv {
-            position: relative;
-            padding-right: 10px;
+        .hero-inner {
+            max-width: 860px;
         }
 
         .hero-tag {
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            padding: 4px 12px;
+            padding: 3px 12px;
             border-radius: 999px;
-            border: 1px solid rgba(148,163,184,0.7);
-            background: radial-gradient(circle at 0 0, rgba(148,163,184,0.3), rgba(15,23,42,0.96));
+            border: 1px solid rgba(156,163,175,0.75);
+            background: rgba(15,23,42,0.8);
             font-size: 12px;
             color: #e5e7eb;
             margin-bottom: 18px;
         }
 
         .hero-tag-dot {
-            width: 7px;
-            height: 7px;
+            width: 6px;
+            height: 6px;
             border-radius: 999px;
-            background: radial-gradient(circle at 30% 0%, #f97316 0, #facc6b 45%, #92400e 100%);
+            background: #ffffff;
         }
 
         .hero-title {
             font-size: 30px;
             font-weight: 600;
-            letter-spacing: 0.08em;
+            letter-spacing: 0.06em;
             margin-bottom: 18px;
             color: #f9fafb;
         }
@@ -267,90 +275,25 @@
         .hero-subtitle {
             font-size: 15px;
             color: #d1d5db;
-            max-width: 680px;
+            max-width: 760px;
         }
 
         .hero-meta {
             font-size: 12px;
             color: #9ca3af;
-            margin-top: 24px;
+            margin-top: 22px;
         }
 
         .hero-meta span + span {
             margin-left: 16px;
         }
 
-        /* 右侧“金属面板感” */
-        .hero-panel-wrap {
-            position: relative;
-        }
-
-        .hero-panel {
-            position: relative;
-            border-radius: 24px;
-            padding: 24px 22px 22px;
-            background:
-                radial-gradient(circle at 0% 0%, rgba(56,189,248,0.22) 0, transparent 55%),
-                linear-gradient(145deg, #020617, #020617, #020617);
-            box-shadow:
-                0 26px 80px rgba(0,0,0,0.95),
-                0 0 0 1px rgba(31,41,55,1);
-            overflow: hidden;
-        }
-
-        .hero-panel::before {
-            content: "";
-            position: absolute;
-            inset: -40%;
-            background:
-                conic-gradient(from 210deg,
-                    rgba(148,163,184,0.38),
-                    transparent,
-                    transparent,
-                    rgba(30,64,175,0.42),
-                    transparent,
-                    rgba(148,163,184,0.22));
-            mix-blend-mode: soft-light;
-            opacity: 0.75;
-            pointer-events: none;
-        }
-
-        .hero-panel-inner {
-            position: relative;
-            z-index: 1;
-            font-size: 13px;
-            color: #e5e7eb;
-        }
-
-        .hero-panel-title {
-            font-size: 13px;
-            letter-spacing: .16em;
-            text-transform: uppercase;
-            color: #9ca3af;
-            margin-bottom: 10px;
-        }
-
-        .hero-panel-main {
-            font-size: 14px;
-            color: #e5e7eb;
-            margin-bottom: 14px;
-        }
-
-        .hero-panel-list {
-            font-size: 13px;
-            color: #9ca3af;
-        }
-
-        .hero-panel-list li {
-            margin-bottom: 4px;
-        }
-
-        /* 下方四块内容：不再用卡片，整页铺开，靠排版区分 */
         main {
             padding-top: 14px;
         }
 
         section[id] {
+            position: relative;
             padding: 56px 0;
             border-bottom: 1px solid rgba(31,41,55,0.9);
         }
@@ -359,16 +302,37 @@
             border-bottom: none;
         }
 
+        /* 锚点高亮：1 秒闪一下边缘，而不是一直高亮 */
         section[id] {
             scroll-margin-top: 120px;
         }
 
-        /* 锚点轻微高光效果（不做明显块） */
-        section[id]:target {
-            background:
-                radial-gradient(circle at 10% 0%, rgba(56,189,248,0.12), transparent 60%),
-                radial-gradient(circle at 90% 0%, rgba(30,64,175,0.12), transparent 60%);
-            transition: background 0.9s ease-out;
+        section[id]:target::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            border-radius: 0;
+            pointer-events: none;
+            animation: sectionFlash 1s ease-out;
+        }
+
+        @keyframes sectionFlash {
+            0% {
+                box-shadow: 0 0 0 0 rgba(249,250,251,0);
+                outline: 0 solid rgba(249,250,251,0);
+            }
+            30% {
+                box-shadow: 0 0 0 1px rgba(249,250,251,0.7);
+                outline: 1px solid rgba(249,250,251,0.35);
+            }
+            70% {
+                box-shadow: 0 0 0 1px rgba(249,250,251,0.3);
+                outline: 1px solid rgba(249,250,251,0.12);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(249,250,251,0);
+                outline: 0 solid rgba(249,250,251,0);
+            }
         }
 
         .section-headline {
@@ -399,10 +363,10 @@
             margin-top: 10px;
         }
 
-        /* 业务板块：使用两列排版，非卡片 */
+        /* 业务板块布局：两列，但不是卡片 */
         .biz-layout {
             display: grid;
-            grid-template-columns: minmax(0, 1.2fr) minmax(0, 1.8fr);
+            grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.9fr);
             gap: 32px;
             align-items: flex-start;
         }
@@ -463,7 +427,7 @@
 
         .contact-link {
             font-size: 13px;
-            color: #7dd3fc;
+            color: #9ca3af;
             text-decoration: none;
             white-space: nowrap;
         }
@@ -481,12 +445,8 @@
 
         /* 响应式 */
         @media (max-width: 900px) {
-            .hero-grid {
-                grid-template-columns: minmax(0, 1fr);
-                gap: 32px;
-            }
             .hero {
-                padding-top: 32px;
+                padding-top: 40px;
             }
         }
 
@@ -509,9 +469,7 @@
                 margin-top: 10px;
                 flex-direction: column;
                 gap: 10px;
-                background:
-                    radial-gradient(circle at 0% 0%, rgba(56,189,248,0.14) 0, transparent 55%),
-                    linear-gradient(145deg, #020617, #020617);
+                background: rgba(10,15,25,0.98);
                 padding: 10px 14px;
                 border-radius: 14px;
                 box-shadow:
@@ -557,42 +515,23 @@
 <div class="page">
     <div class="shell">
 
-        <!-- 顶部 Hero：集团/企业抬头 -->
+        <!-- Hero：简洁抬头 -->
         <section class="hero">
-            <div class="hero-grid">
-                <div class="hero-kv">
-                    <div class="hero-tag">
-                        <div class="hero-tag-dot"></div>
-                        <span>信息服务 · 工具赋能 · 轻量型企业团队</span>
-                    </div>
-                    <h1 class="hero-title">
-                        在不夸张、不喧哗的前提下，把信息与决策这件事，做得更清楚一点。
-                    </h1>
-                    <p class="hero-subtitle">
-                        锐宸科技总部位于武汉西北湖商圈，以信息梳理、流程优化与工具化落地为起点，
-                        为企业与专业个体提供低噪音、可执行的支持服务。我们更关注真实业务场景，而不是热闹概念。
-                    </p>
-                    <div class="hero-meta">
-                        <span>总部：武汉 · 西北湖 · 国金中心</span>
-                        <span>形态：小团队 · 深参与 · 控节奏</span>
-                    </div>
+            <div class="hero-inner">
+                <div class="hero-tag">
+                    <div class="hero-tag-dot"></div>
+                    <span>信息服务 · 工具赋能 · 轻量型企业团队</span>
                 </div>
-
-                <div class="hero-panel-wrap">
-                    <div class="hero-panel">
-                        <div class="hero-panel-inner">
-                            <div class="hero-panel-title">RUICHEN TECH · CURRENT FOCUS</div>
-                            <div class="hero-panel-main">
-                                通过信息整理、结构化思考与适度的技术应用，帮助客户在复杂与不确定中，保留一部分清晰。
-                            </div>
-                            <ul class="hero-panel-list">
-                                <li>· 面向企业与专业个人的轻量咨询与顾问支持</li>
-                                <li>· 信息与资料梳理、结构搭建、要点提炼</li>
-                                <li>· 利用现有工具与 AI 能力，搭建小型“效率系统”</li>
-                                <li>· 针对具体项目提供阶段性复盘与决策陪伴</li>
-                            </ul>
-                        </div>
-                    </div>
+                <h1 class="hero-title">
+                    在不喧哗的前提下，把信息和决策这件事，做得更清楚一点。
+                </h1>
+                <p class="hero-subtitle">
+                    锐宸科技位于武汉西北湖商圈，以信息梳理、流程优化与工具化落地为起点，
+                    为企业与专业个体提供低噪音、可执行的支持服务。我们更关注真实业务场景，而不是热闹概念。
+                </p>
+                <div class="hero-meta">
+                    <span>总部：武汉 · 西北湖 · 国金中心</span>
+                    <span>形态：小团队 · 深参与 · 控节奏</span>
                 </div>
             </div>
         </section>
@@ -700,12 +639,14 @@
                         <p>
                             <strong>电话：</strong>
                             <a href="tel:15623312393">156-2331-2393</a>
-                      
+                            /
+                            <a href="tel:13638612385">136-3861-2385</a>
                         </p>
                         <p>
                             <strong>邮箱：</strong>
                             <a href="mailto:ma@ruichen.tech">ma@ruichen.tech</a>
-                          
+                            /
+                            <a href="mailto:yuan@ruichen.tech">yuan@ruichen.tech</a>
                         </p>
                         <div class="contact-row">
                             <span><strong>地址：</strong>武汉 · 西北湖 · 国金中心</span>
