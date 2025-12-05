@@ -10,9 +10,11 @@
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, Arial, sans-serif;
-            line-height: 1.7;
+            line-height: 1.8;
             background:
-                radial-gradient(circle at 0% 0%, #1e293b 0, #020617 38%, #000 100%);
+                radial-gradient(circle at 10% 0%, #020617 0, #020617 32%, #020617 40%, #020617 48%, #020617 100%),
+                radial-gradient(circle at 90% 0%, #020617 0, #020617 40%, #020617 52%, #020617 100%),
+                radial-gradient(circle at 50% 120%, #020617 0, #020617 40%, #020617 100%);
             color: #e5e7eb;
         }
 
@@ -37,20 +39,16 @@
             transform: translateX(-50%);
             width: 100%;
             max-width: 1200px;
-            padding: 12px 24px 10px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            background:
-                linear-gradient(135deg, rgba(15,23,42,0.96), rgba(15,23,42,0.96))
-                border-box;
-            border-radius: 0 0 18px 18px;
-            box-shadow:
-                0 22px 60px rgba(0,0,0,0.65),
-                0 0 0 1px rgba(148,163,184,0.38);
-            backdrop-filter: blur(18px);
+            padding: 10px 24px 10px;
             z-index: 1000;
-            transition: transform 0.25s ease, opacity 0.25s ease, box-shadow 0.25s ease;
+            transition: transform 0.25s ease, opacity 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+            border-radius: 0 0 18px 18px;
+            background:
+                linear-gradient(135deg, rgba(15,23,42,0.98), rgba(15,23,42,0.98));
+            box-shadow:
+                0 16px 48px rgba(0,0,0,0.85),
+                0 0 0 1px rgba(31,41,55,0.9);
+            backdrop-filter: blur(18px);
         }
 
         .topbar::before {
@@ -59,11 +57,11 @@
             inset: 0;
             border-radius: inherit;
             background: linear-gradient(120deg,
-                rgba(148,163,184,0.18),
-                rgba(248,250,252,0.16),
-                rgba(30,64,175,0.12),
-                rgba(15,23,42,0.0));
-            opacity: 0.55;
+                rgba(148,163,184,0.3),
+                rgba(15,23,42,0),
+                rgba(15,23,42,0),
+                rgba(30,64,175,0.35));
+            opacity: 0.4;
             mix-blend-mode: screen;
             pointer-events: none;
         }
@@ -71,7 +69,6 @@
         .topbar-inner {
             position: relative;
             z-index: 1;
-            width: 100%;
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -91,34 +88,35 @@
 
         .brand-logo {
             position: relative;
-            width: 36px;
-            height: 36px;
+            width: 34px;
+            height: 34px;
             border-radius: 12px;
-            background: radial-gradient(circle at 20% 0%, #f97316 0, #020617 52%, #020617 100%);
+            background:
+                radial-gradient(circle at 20% 0%, #f97316 0, #0f172a 45%, #020617 100%);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 17px;
+            font-size: 16px;
             font-weight: 600;
             color: #e5e7eb;
             box-shadow:
-                0 0 0 1px rgba(148,163,184,0.55),
-                0 18px 40px rgba(0,0,0,0.85);
+                0 16px 40px rgba(0,0,0,0.9),
+                0 0 0 1px rgba(148,163,184,0.7);
             overflow: hidden;
         }
 
         .brand-logo::before {
             content: "";
             position: absolute;
-            inset: 1px;
+            inset: 2px;
             border-radius: inherit;
             background:
-                linear-gradient(135deg,
-                    rgba(15,23,42,0.0),
-                    rgba(148,163,184,0.32),
-                    rgba(15,23,42,0.85));
-            mix-blend-mode: screen;
-            opacity: 0.6;
+                linear-gradient(145deg,
+                    rgba(15,23,42,1),
+                    rgba(148,163,184,0.35),
+                    rgba(15,23,42,1));
+            mix-blend-mode: soft-light;
+            opacity: 0.75;
         }
 
         .brand-logo span {
@@ -129,8 +127,9 @@
         .brand-text-main {
             font-size: 17px;
             font-weight: 600;
-            letter-spacing: 0.08em;
+            letter-spacing: 0.16em;
         }
+
         .brand-text-sub {
             font-size: 12px;
             opacity: 0.7;
@@ -141,16 +140,18 @@
         .nav-links {
             display: flex;
             gap: 32px;
-            font-size: 15px;
+            font-size: 14px;
             font-weight: 500;
         }
 
         .nav-links a {
             text-decoration: none;
             color: #e5e7eb;
-            opacity: 0.86;
+            opacity: 0.84;
             position: relative;
             padding-bottom: 2px;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
         }
 
         .nav-links a::after {
@@ -159,7 +160,7 @@
             left: 0;
             bottom: -3px;
             width: 0;
-            height: 2px;
+            height: 1px;
             background: linear-gradient(90deg, #38bdf8, #facc6b);
             transition: width 0.24s ease;
         }
@@ -179,7 +180,7 @@
             height: 32px;
             border-radius: 999px;
             border: 1px solid rgba(148,163,184, 0.6);
-            background: radial-gradient(circle at 0% 0%, #1f2937 0, #020617 85%);
+            background: radial-gradient(circle at 0% 0%, #111827 0, #020617 85%);
             align-items: center;
             justify-content: center;
             cursor: pointer;
@@ -209,171 +210,178 @@
 
         .topbar.menu-open {
             box-shadow:
-                0 28px 70px rgba(0,0,0,0.9),
-                0 0 0 1px rgba(148,163,184,0.5);
+                0 24px 70px rgba(0,0,0,0.95),
+                0 0 0 1px rgba(55,65,81,1);
         }
+
         .topbar.menu-open .nav-links {
             display: flex;
         }
 
-        /* Hero 第一屏：深色金属磨砂感 */
+        /* 顶部 Hero：整页铺开的一段，不做卡片 */
         .hero {
-            margin-top: 22px;
-            margin-bottom: 30px;
+            padding: 42px 0 56px;
+            border-bottom: 1px solid rgba(31,41,55,0.9);
         }
 
-        .hero-card {
+        .hero-grid {
+            display: grid;
+            grid-template-columns: minmax(0, 3.2fr) minmax(0, 2.3fr);
+            gap: 42px;
+            align-items: center;
+        }
+
+        .hero-kv {
             position: relative;
-            border-radius: 26px;
-            padding: 52px 52px 46px;
-            background:
-                radial-gradient(circle at 0% 0%, rgba(56,189,248,0.18) 0, transparent 40%),
-                radial-gradient(circle at 100% 0%, rgba(250,204,21,0.16) 0, transparent 42%),
-                linear-gradient(135deg, rgba(15,23,42,0.96), rgba(2,6,23,0.98));
-            box-shadow:
-                0 40px 120px rgba(0,0,0,0.95),
-                0 0 0 1px rgba(148,163,184,0.55);
-            overflow: hidden;
-        }
-
-        .hero-card::before {
-            content: "";
-            position: absolute;
-            inset: -40%;
-            background:
-                conic-gradient(from 210deg,
-                    rgba(248,250,252,0.18),
-                    transparent,
-                    transparent,
-                    rgba(148,163,184,0.22),
-                    transparent,
-                    rgba(56,189,248,0.16),
-                    transparent);
-            mix-blend-mode: soft-light;
-            opacity: 0.45;
-            pointer-events: none;
-        }
-
-        .hero-inner {
-            position: relative;
-            z-index: 1;
+            padding-right: 10px;
         }
 
         .hero-tag {
             display: inline-flex;
             align-items: center;
-            gap: 6px;
-            padding: 4px 10px;
+            gap: 8px;
+            padding: 4px 12px;
             border-radius: 999px;
-            background: rgba(15,23,42,0.9);
             border: 1px solid rgba(148,163,184,0.7);
+            background: radial-gradient(circle at 0 0, rgba(148,163,184,0.3), rgba(15,23,42,0.96));
             font-size: 12px;
             color: #e5e7eb;
             margin-bottom: 18px;
-            box-shadow: 0 8px 30px rgba(0,0,0,0.85);
         }
 
         .hero-tag-dot {
             width: 7px;
             height: 7px;
             border-radius: 999px;
-            background: radial-gradient(circle at 30% 0%, #facc6b 0, #f97316 40%, #b45309 100%);
+            background: radial-gradient(circle at 30% 0%, #f97316 0, #facc6b 45%, #92400e 100%);
         }
 
         .hero-title {
             font-size: 30px;
             font-weight: 600;
-            letter-spacing: 0.06em;
-            margin-bottom: 14px;
+            letter-spacing: 0.08em;
+            margin-bottom: 18px;
             color: #f9fafb;
         }
 
         .hero-subtitle {
             font-size: 15px;
-            max-width: 760px;
             color: #d1d5db;
+            max-width: 680px;
         }
 
-        /* 主内容区整体 */
-        .sections {
-            display: flex;
-            flex-direction: column;
-            gap: 32px;
+        .hero-meta {
+            font-size: 12px;
+            color: #9ca3af;
+            margin-top: 24px;
         }
 
-        .section-block {
+        .hero-meta span + span {
+            margin-left: 16px;
+        }
+
+        /* 右侧“金属面板感” */
+        .hero-panel-wrap {
+            position: relative;
+        }
+
+        .hero-panel {
             position: relative;
             border-radius: 24px;
-            padding: 28px 30px 34px;
+            padding: 24px 22px 22px;
             background:
-                radial-gradient(circle at 0% 0%, rgba(56,189,248,0.08) 0, transparent 55%),
-                linear-gradient(145deg, rgba(15,23,42,0.96), rgba(15,23,42,0.98));
+                radial-gradient(circle at 0% 0%, rgba(56,189,248,0.22) 0, transparent 55%),
+                linear-gradient(145deg, #020617, #020617, #020617);
             box-shadow:
-                0 26px 80px rgba(0,0,0,0.9),
+                0 26px 80px rgba(0,0,0,0.95),
                 0 0 0 1px rgba(31,41,55,1);
             overflow: hidden;
         }
 
-        .section-block::before {
+        .hero-panel::before {
             content: "";
             position: absolute;
-            inset: 0;
-            border-radius: inherit;
+            inset: -40%;
             background:
-                linear-gradient(125deg,
-                    rgba(148,163,184,0.22),
-                    rgba(15,23,42,0.0),
-                    rgba(15,23,42,0.0),
-                    rgba(15,23,42,0.75));
+                conic-gradient(from 210deg,
+                    rgba(148,163,184,0.38),
+                    transparent,
+                    transparent,
+                    rgba(30,64,175,0.42),
+                    transparent,
+                    rgba(148,163,184,0.22));
             mix-blend-mode: soft-light;
-            opacity: 0.6;
+            opacity: 0.75;
             pointer-events: none;
         }
 
-        /* 锚点高亮：边缘闪动效果 */
-        .section-block[id] {
+        .hero-panel-inner {
+            position: relative;
+            z-index: 1;
+            font-size: 13px;
+            color: #e5e7eb;
+        }
+
+        .hero-panel-title {
+            font-size: 13px;
+            letter-spacing: .16em;
+            text-transform: uppercase;
+            color: #9ca3af;
+            margin-bottom: 10px;
+        }
+
+        .hero-panel-main {
+            font-size: 14px;
+            color: #e5e7eb;
+            margin-bottom: 14px;
+        }
+
+        .hero-panel-list {
+            font-size: 13px;
+            color: #9ca3af;
+        }
+
+        .hero-panel-list li {
+            margin-bottom: 4px;
+        }
+
+        /* 下方四块内容：不再用卡片，整页铺开，靠排版区分 */
+        main {
+            padding-top: 14px;
+        }
+
+        section[id] {
+            padding: 56px 0;
+            border-bottom: 1px solid rgba(31,41,55,0.9);
+        }
+
+        section[id]:last-of-type {
+            border-bottom: none;
+        }
+
+        section[id] {
             scroll-margin-top: 120px;
         }
 
-        .section-block:target {
-            animation: sectionHighlight 1.05s ease-out;
+        /* 锚点轻微高光效果（不做明显块） */
+        section[id]:target {
+            background:
+                radial-gradient(circle at 10% 0%, rgba(56,189,248,0.12), transparent 60%),
+                radial-gradient(circle at 90% 0%, rgba(30,64,175,0.12), transparent 60%);
+            transition: background 0.9s ease-out;
         }
 
-        @keyframes sectionHighlight {
-            0% {
-                box-shadow:
-                    0 0 0 0 rgba(56,189,248,0.0),
-                    0 24px 70px rgba(0,0,0,0.9);
-            }
-            20% {
-                box-shadow:
-                    0 0 0 8px rgba(56,189,248,0.65),
-                    0 30px 90px rgba(0,0,0,1);
-            }
-            65% {
-                box-shadow:
-                    0 0 0 2px rgba(56,189,248,0.35),
-                    0 26px 80px rgba(0,0,0,0.95);
-            }
-            100% {
-                box-shadow:
-                    0 0 0 0 rgba(56,189,248,0.0),
-                    0 26px 80px rgba(0,0,0,0.9);
-            }
-        }
-
-        .section-header {
-            position: relative;
+        .section-headline {
             margin-bottom: 18px;
-            z-index: 1;
         }
 
         .section-title {
-            font-size: 22px;
+            font-size: 20px;
             font-weight: 600;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
             color: #f9fafb;
             margin-bottom: 6px;
-            letter-spacing: 0.08em;
         }
 
         .section-subtitle {
@@ -382,72 +390,48 @@
         }
 
         .section-body {
-            position: relative;
-            z-index: 1;
             font-size: 15px;
             color: #e5e7eb;
             max-width: 900px;
         }
 
-        /* 业务板块卡片 */
-        .biz-grid {
-            position: relative;
-            z-index: 1;
+        .section-body p + p {
+            margin-top: 10px;
+        }
+
+        /* 业务板块：使用两列排版，非卡片 */
+        .biz-layout {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-            gap: 18px;
-            margin-top: 6px;
+            grid-template-columns: minmax(0, 1.2fr) minmax(0, 1.8fr);
+            gap: 32px;
+            align-items: flex-start;
+        }
+
+        .biz-label {
+            font-size: 13px;
+            color: #9ca3af;
+        }
+
+        .biz-items {
+            font-size: 14px;
+            color: #e5e7eb;
         }
 
         .biz-item {
-            position: relative;
-            border-radius: 18px;
-            padding: 16px 16px 18px;
-            font-size: 14px;
-            background:
-                radial-gradient(circle at 0% 0%, rgba(56,189,248,0.20) 0, transparent 60%),
-                linear-gradient(145deg, rgba(15,23,42,1), rgba(17,24,39,1));
-            box-shadow:
-                0 22px 60px rgba(0,0,0,0.9),
-                0 0 0 1px rgba(55,65,81,0.9);
-            overflow: hidden;
+            margin-bottom: 18px;
         }
 
-        .biz-item::before {
-            content: "";
-            position: absolute;
-            inset: -40%;
-            background:
-                conic-gradient(from 250deg,
-                    rgba(148,163,184,0.25),
-                    transparent,
-                    transparent,
-                    rgba(56,189,248,0.35),
-                    transparent);
-            mix-blend-mode: soft-light;
-            opacity: 0.5;
-            pointer-events: none;
-        }
-
-        .biz-inner {
-            position: relative;
-            z-index: 1;
-        }
-
-        .biz-title {
+        .biz-name {
             font-weight: 600;
-            margin-bottom: 6px;
-            color: #f9fafb;
+            margin-bottom: 4px;
         }
 
-        .biz-body {
+        .biz-desc {
             color: #d1d5db;
         }
 
-        /* 联系我们区 */
+        /* 联系方式 */
         .contact-lines {
-            position: relative;
-            z-index: 1;
             font-size: 15px;
             color: #e5e7eb;
         }
@@ -489,7 +473,7 @@
         }
 
         footer {
-            margin-top: 28px;
+            margin-top: 32px;
             font-size: 12px;
             color: #6b7280;
             text-align: center;
@@ -497,12 +481,12 @@
 
         /* 响应式 */
         @media (max-width: 900px) {
-            .hero-card {
-                padding: 36px 22px 30px;
+            .hero-grid {
+                grid-template-columns: minmax(0, 1fr);
+                gap: 32px;
             }
-            .section-block {
-                padding: 24px 18px 30px;
-                min-height: auto;
+            .hero {
+                padding-top: 32px;
             }
         }
 
@@ -524,9 +508,9 @@
                 top: 100%;
                 margin-top: 10px;
                 flex-direction: column;
-                gap: 12px;
+                gap: 10px;
                 background:
-                    radial-gradient(circle at 0% 0%, rgba(56,189,248,0.18) 0, transparent 55%),
+                    radial-gradient(circle at 0% 0%, rgba(56,189,248,0.14) 0, transparent 55%),
                     linear-gradient(145deg, #020617, #020617);
                 padding: 10px 14px;
                 border-radius: 14px;
@@ -540,6 +524,9 @@
             .hero-title {
                 font-size: 24px;
             }
+            .biz-layout {
+                grid-template-columns: minmax(0, 1fr);
+            }
         }
     </style>
 </head>
@@ -550,7 +537,7 @@
             <div class="brand-logo"><span>RC</span></div>
             <div>
                 <div class="brand-text-main">锐宸科技</div>
-                <div class="brand-text-sub">Ruichen Tech · 武汉</div>
+                <div class="brand-text-sub">Ruichen Tech · Wuhan</div>
             </div>
         </div>
 
@@ -570,103 +557,132 @@
 <div class="page">
     <div class="shell">
 
-        <!-- Hero 第一屏：公司抬头 -->
+        <!-- 顶部 Hero：集团/企业抬头 -->
         <section class="hero">
-            <div class="hero-card">
-                <div class="hero-inner">
+            <div class="hero-grid">
+                <div class="hero-kv">
                     <div class="hero-tag">
                         <div class="hero-tag-dot"></div>
-                        <span>锐宸科技 · 信息与情感服务</span>
+                        <span>信息服务 · 工具赋能 · 轻量型企业团队</span>
                     </div>
-                    <h1 class="hero-title">用系统化方法与科技工具，服务真实的个体与关系。</h1>
+                    <h1 class="hero-title">
+                        在不夸张、不喧哗的前提下，把信息与决策这件事，做得更清楚一点。
+                    </h1>
                     <p class="hero-subtitle">
-                        锐宸科技总部位于武汉西北湖商圈，以“信息梳理 + 情感服务”为起点，围绕个体真实处境与长期决策，
-                        提供可落地的一对一咨询与陪伴服务，并持续探索将 AI 与工具化能力嵌入服务流程。
+                        锐宸科技总部位于武汉西北湖商圈，以信息梳理、流程优化与工具化落地为起点，
+                        为企业与专业个体提供低噪音、可执行的支持服务。我们更关注真实业务场景，而不是热闹概念。
                     </p>
+                    <div class="hero-meta">
+                        <span>总部：武汉 · 西北湖 · 国金中心</span>
+                        <span>形态：小团队 · 深参与 · 控节奏</span>
+                    </div>
+                </div>
+
+                <div class="hero-panel-wrap">
+                    <div class="hero-panel">
+                        <div class="hero-panel-inner">
+                            <div class="hero-panel-title">RUICHEN TECH · CURRENT FOCUS</div>
+                            <div class="hero-panel-main">
+                                通过信息整理、结构化思考与适度的技术应用，帮助客户在复杂与不确定中，保留一部分清晰。
+                            </div>
+                            <ul class="hero-panel-list">
+                                <li>· 面向企业与专业个人的轻量咨询与顾问支持</li>
+                                <li>· 信息与资料梳理、结构搭建、要点提炼</li>
+                                <li>· 利用现有工具与 AI 能力，搭建小型“效率系统”</li>
+                                <li>· 针对具体项目提供阶段性复盘与决策陪伴</li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <div class="sections">
-
+        <main>
             <!-- 公司简介 -->
-            <section class="section-block" id="company">
-                <div class="section-header">
+            <section id="company">
+                <div class="section-headline">
                     <div class="section-title">公司简介</div>
-                    <div class="section-subtitle">Ruichen Tech · 武汉 · 西北湖 · 国金中心</div>
+                    <div class="section-subtitle">Ruichen Tech · 信息与工具驱动的服务公司</div>
                 </div>
                 <div class="section-body">
-                    锐宸科技是一家保持“轻量但专业”的服务型公司，目前聚焦于信息与情感相关服务领域。
-                    我们更关心真实的人、处在真实场景里的选择，而不是提供一句话的“标准答案”。
-                    <br><br>
-                    公司以线上深度咨询为主，辅以结构化分析、案例复盘与阶段性陪伴，
-                    尽量在复杂、模糊、情绪化的情境中，帮客户多看清一点事实、多想清一层后果。
-                    后续我们也会在企业服务、工具化产品等方向做探索，但仍会保持节奏克制与体量可控。
+                    <p>
+                        锐宸科技是一家保持“体量可控、效率可感”的服务公司，目前主要围绕信息梳理、
+                        决策支撑与工具赋能三类方向开展工作。我们服务的对象包括正在推进关键项目的
+                        企业管理者、独立从业者，以及需要长期输出与决策支持的专业个体。
+                    </p>
+                    <p>
+                        与传统咨询公司相比，我们更愿意在相对小的范围内深度参与，更少套话模板，
+                        更重视信息还原、节奏与成本的平衡；与纯工具提供方相比，我们会在理解具体场景的前提下，
+                        帮客户把“工具怎么用”“流程怎么接”这件事真正落地。
+                    </p>
                 </div>
             </section>
 
             <!-- 关于我们 -->
-            <section class="section-block" id="about">
-                <div class="section-header">
+            <section id="about">
+                <div class="section-headline">
                     <div class="section-title">关于我们</div>
-                    <div class="section-subtitle">小团队、低噪音、追求稳定质量的服务形态</div>
+                    <div class="section-subtitle">小团队 · 重方法 · 控噪音</div>
                 </div>
                 <div class="section-body">
-                    锐宸科技目前以创始人为核心，保持小规模运营，更专注于咨询质量和方法沉淀，而不是快速扩张。
-                    我们希望在形式和包装之外，把主要精力放在两件事上：
-                    <br><br>
-                    ① 把客户的真实信息、关系脉络和情绪状态，尽量还原清楚；<br>
-                    ② 在不夸大、不承诺过度结果的前提下，提供可执行、节奏可控的行动建议。
-                    <br><br>
-                    对我们来说，“专业感”不仅是技能，更体现在边界感和长期视角上——
-                    能帮到的，我们尽量给到足够清晰的建议；不适合做的，我们也会明确说“不”。
+                    <p>
+                        锐宸科技由长期深度参与一线业务与个人服务场景的成员发起，团队规模刻意保持在小而稳的状态。
+                        相比铺开的业务线，我们更在意每一个实际在服务的客户、每一段真实经历过的项目。
+                    </p>
+                    <p>
+                        在具体工作中，我们有几个共识：
+                    </p>
+                    <p>
+                        · 在信息层面，尽量把“事实”“判断”“猜测”拆开讲清楚，避免混在一起；<br>
+                        · 在方法层面，重视结构化与节奏感，但不过度包装；<br>
+                        · 在合作层面，坦诚给出边界与预期，不承诺超出能力与条件的结果。
+                    </p>
+                    <p>
+                        我们相信，长期来看，真正有价值的服务是：在重要节点时刻，能帮客户多看清一点情况，
+                        多想清一层后果，而不是制造更多噪音。
+                    </p>
                 </div>
             </section>
 
             <!-- 业务板块 -->
-            <section class="section-block" id="business">
-                <div class="section-header">
+            <section id="business">
+                <div class="section-headline">
                     <div class="section-title">业务板块</div>
-                    <div class="section-subtitle">围绕“信息 + 情感”的几类核心服务方向</div>
+                    <div class="section-subtitle">围绕“信息 · 决策 · 工具”的几个方向</div>
                 </div>
-
-                <div class="biz-grid">
-                    <div class="biz-item">
-                        <div class="biz-inner">
-                            <div class="biz-title">情感与关系咨询</div>
-                            <div class="biz-body">
-                                面向处于情感压力、分手/复合尝试、长期关系消耗中的个体，提供一对一深度沟通。
-                                通过信息梳理、情境推演和界限感讨论，帮助来访者在现实约束下做出更清醒的选择。
-                            </div>
+                <div class="section-body">
+                    <div class="biz-layout">
+                        <div class="biz-label">
+                            当前，我们主要集中在以下几类服务方向，后续会根据实际需求与能力边界进行迭代。
                         </div>
-                    </div>
-
-                    <div class="biz-item">
-                        <div class="biz-inner">
-                            <div class="biz-title">信息梳理与决策支持</div>
-                            <div class="biz-body">
-                                针对多方关系、复杂沟通或关键节点决策（是否复合、是否分手、是否继续投入等），
-                                协助来访者整理事实、分层优先级，并评估不同路径下的风险与代价。
+                        <div class="biz-items">
+                            <div class="biz-item">
+                                <div class="biz-name">信息梳理与研究支持</div>
+                                <div class="biz-desc">
+                                    针对复杂项目或持续输出场景，协助客户整理零散信息、搭建资料结构、划分优先级，
+                                    让后续沟通与决策建立在更清晰的底层之上。
+                                </div>
                             </div>
-                        </div>
-                    </div>
-
-                    <div class="biz-item">
-                        <div class="biz-inner">
-                            <div class="biz-title">长期陪伴与阶段性跟进</div>
-                            <div class="biz-body">
-                                为需要在一段时间内持续调整节奏的来访者，提供周期性服务形式，
-                                包括定期对话、阶段复盘、关键节点提醒等，避免在情绪波动中做出高成本决策。
+                            <div class="biz-item">
+                                <div class="biz-name">流程优化与轻量顾问</div>
+                                <div class="biz-desc">
+                                    从实际工作流出发，对关键节点、协作方式与信息流转进行梳理，提出可执行的优化建议，
+                                    并在一段时间内跟进落地效果与调整。
+                                </div>
                             </div>
-                        </div>
-                    </div>
-
-                    <div class="biz-item">
-                        <div class="biz-inner">
-                            <div class="biz-title">工具与品牌探索</div>
-                            <div class="biz-body">
-                                在具体服务之上，我们也在逐步沉淀可复用的工具与方法论，
-                                并通过“云在”等子品牌，以更贴近用户的方式呈现和迭代服务形态。
+                            <div class="biz-item">
+                                <div class="biz-name">工具选型与小型“系统”搭建</div>
+                                <div class="biz-desc">
+                                    结合现有 SaaS 工具与 AI 能力，为企业或个人搭建适配的“工作台”：包括信息收集、
+                                    笔记/知识库、任务追踪、简单自动化等，重视可维护性，而非炫技。
+                                </div>
+                            </div>
+                            <div class="biz-item">
+                                <div class="biz-name">定制项目与长期合作</div>
+                                <div class="biz-desc">
+                                    针对不方便完全外包、又不适合自建团队的需求，以按阶段、按模块等方式进行合作，
+                                    保持沟通顺畅与节奏可控，尽量减少管理成本。
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -674,35 +690,35 @@
             </section>
 
             <!-- 联系我们 -->
-            <section class="section-block" id="contact">
-                <div class="section-header">
+            <section id="contact">
+                <div class="section-headline">
                     <div class="section-title">联系我们</div>
-                    <div class="section-subtitle">如果你希望进一步了解合作或服务细节</div>
+                    <div class="section-subtitle">如果你有具体项目、想法或合作需求</div>
                 </div>
-
-                <div class="contact-lines">
-                    <p>
-                        <strong>电话：</strong>
-                        <a href="tel:15623312393">156-2331-2393</a>
-                        /
-                        <a href="tel:13638612385">136-3861-2385</a>
-                    </p>
-                    <p>
-                        <strong>邮箱：</strong>
-                        <a href="mailto:ma@ruichen.tech">ma@ruichen.tech</a>
-                        /
-                        <a href="mailto:yuan@ruichen.tech">yuan@ruichen.tech</a>
-                    </p>
-                    <div class="contact-row">
-                        <span><strong>地址：</strong>武汉 · 西北湖 · 国金中心</span>
-                        <a href="https://yunzai.ruichen.tech" class="contact-link" target="_blank" rel="noopener noreferrer">
-                            访问“云在”品牌站点
-                        </a>
+                <div class="section-body">
+                    <div class="contact-lines">
+                        <p>
+                            <strong>电话：</strong>
+                            <a href="tel:15623312393">156-2331-2393</a>
+                            /
+                            <a href="tel:13638612385">136-3861-2385</a>
+                        </p>
+                        <p>
+                            <strong>邮箱：</strong>
+                            <a href="mailto:ma@ruichen.tech">ma@ruichen.tech</a>
+                            /
+                            <a href="mailto:yuan@ruichen.tech">yuan@ruichen.tech</a>
+                        </p>
+                        <div class="contact-row">
+                            <span><strong>地址：</strong>武汉 · 西北湖 · 国金中心</span>
+                            <a href="https://yunzai.ruichen.tech" class="contact-link" target="_blank" rel="noopener noreferrer">
+                                查看旗下品牌「云在」
+                            </a>
+                        </div>
                     </div>
                 </div>
             </section>
-
-        </div>
+        </main>
 
         <footer>
             © 锐宸科技 Ruichen Tech. All rights reserved.
