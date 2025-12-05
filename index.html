@@ -11,32 +11,32 @@
         body {
             font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, Arial, sans-serif;
             line-height: 1.8;
-            /* 深邃宇宙银河背景：多层星云光晕+暗色空间 */
+            /* 深邃宇宙银河背景：整体偏暗，光晕收在边缘，中心更稳 */
             background:
-                radial-gradient(circle at 10% -10%, #1d4ed8 0, rgba(15,23,42,0.1) 38%, transparent 55%),
-                radial-gradient(circle at 90% 0%, #7c3aed 0, rgba(15,23,42,0.15) 40%, transparent 58%),
-                radial-gradient(circle at 18% 65%, #0ea5e9 0, rgba(15,23,42,0.18) 42%, transparent 60%),
-                radial-gradient(circle at 82% 75%, #22c55e1c 0, rgba(15,23,42,0.16) 40%, transparent 62%),
+                radial-gradient(circle at -5% -10%, #1d4ed880 0, rgba(15,23,42,0.15) 35%, transparent 55%),
+                radial-gradient(circle at 110% -10%, #7c3aed80 0, rgba(15,23,42,0.15) 35%, transparent 58%),
+                radial-gradient(circle at 12% 70%, #0ea5e970 0, rgba(15,23,42,0.18) 40%, transparent 60%),
+                radial-gradient(circle at 88% 80%, #22c55e3a 0, rgba(15,23,42,0.22) 40%, transparent 62%),
                 radial-gradient(circle at 50% 120%, #020617 0, #020617 45%, #020617 70%, #000000 92%);
             color: #e5e7eb;
             position: relative;
             overflow-x: hidden;
         }
 
-        /* 轻微星空噪点层 + 一点蓝紫色星尘 */
+        /* 轻微星空噪点层 + 蓝紫星尘，但整体降低亮度 */
         body::before {
             content: "";
             position: fixed;
             inset: 0;
             pointer-events: none;
             background-image:
-                radial-gradient(#ffffff1a 1px, transparent 1px),
-                radial-gradient(#60a5fa19 1px, transparent 1px),
-                radial-gradient(#a855f719 1px, transparent 1px);
-            background-size: 180px 180px, 260px 260px, 220px 220px;
-            background-position: 0 0, 80px 120px, 40px 200px;
+                radial-gradient(#ffffff12 1px, transparent 1px),
+                radial-gradient(#60a5fa14 1px, transparent 1px),
+                radial-gradient(#a855f714 1px, transparent 1px);
+            background-size: 200px 200px, 280px 280px, 260px 260px;
+            background-position: 0 0, 80px 140px, 40px 220px;
             mix-blend-mode: screen;
-            opacity: 0.32;
+            opacity: 0.26;
             z-index: -1;
         }
 
@@ -239,13 +239,25 @@
             display: flex;
         }
 
-        /* Hero：放大，居中简洁 */
+        /* Hero：放大，居中简洁 + 局部暗角保证文字清晰 */
         .hero {
+            position: relative;
             padding: 92px 0 80px;
             min-height: 72vh;
             display: flex;
             align-items: center;
             border-bottom: 1px solid rgba(31,41,55,0.9);
+        }
+
+        /* 在 Hero 下再加一层暗色罩，压住中心光晕 */
+        .hero::before {
+            content: "";
+            position: absolute;
+            inset: -40px -80px;
+            background:
+                radial-gradient(circle at 50% 30%, rgba(0,0,0,0.7) 0, rgba(0,0,0,0.6) 30%, transparent 70%);
+            pointer-events: none;
+            z-index: -1;
         }
 
         .hero-inner {
@@ -338,7 +350,7 @@
             }
             100% {
                 box-shadow: 0 0 0 0 rgba(249,250,251,0);
-                outline: 0 solidrgba(249,250,251,0);
+                outline: 0 solid rgba(249,250,251,0);
             }
         }
 
@@ -370,7 +382,7 @@
             margin-top: 10px;
         }
 
-        /* 业务板块布局：两列展开，不是卡片 */
+        /* 业务板块布局：两列展开 */
         .biz-layout {
             display: grid;
             grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.9fr);
@@ -531,10 +543,10 @@
                     <span>信息服务 · 工具赋能 · 轻量型企业团队</span>
                 </div>
                 <h1 class="hero-title">
-                    在不喧哗的前提下，把信息和决策这件事，做得更清楚一点。
+                    在不喧哗的前提下，把信息和决策做得更清楚一点。
                 </h1>
                 <p class="hero-subtitle">
-                    锐宸科技位于武汉西北湖商圈，以信息梳理、流程优化与工具化落地为起点，
+                    锐宸科技扎根武汉西北湖商圈，聚焦信息梳理、流程优化与工具化落地，
                     为企业与专业个体提供低噪音、可执行的支持服务。我们更关注真实业务场景，而不是热闹概念。
                 </p>
                 <div class="hero-meta">
@@ -553,14 +565,14 @@
                 </div>
                 <div class="section-body">
                     <p>
-                        锐宸科技是一家保持“体量可控、效率可感”的服务公司，目前主要围绕信息梳理、
-                        决策支撑与工具赋能三类方向开展工作。我们服务的对象包括正在推进关键项目的
-                        企业管理者、独立从业者，以及需要长期输出与决策支持的专业个体。
+                        锐宸科技是一家刻意保持“体量可控、效率可感”的服务公司，围绕信息梳理、
+                        决策支撑与工具赋能三个方向展开工作。服务对象包括推进关键项目的企业管理者、
+                        独立从业者，以及需要长期输出与决策支持的专业个体。
                     </p>
                     <p>
-                        与传统咨询公司相比，我们更愿意在相对小的范围内深度参与，更少套话模板，
+                        与传统咨询公司相比，我们更愿意在相对小的范围内深度参与，减少套话模板，
                         更重视信息还原、节奏与成本的平衡；与纯工具提供方相比，我们会在理解具体场景的前提下，
-                        帮客户把“工具怎么用”“流程怎么接”这件事真正落地。
+                        帮客户把“工具怎么用”“流程怎么接”真正落到日常。
                     </p>
                 </div>
             </section>
@@ -573,8 +585,8 @@
                 </div>
                 <div class="section-body">
                     <p>
-                        锐宸科技由长期深度参与一线业务与个人服务场景的成员发起，团队规模刻意保持在小而稳的状态。
-                        相比铺开的业务线，我们更在意每一个实际在服务的客户、每一段真实经历过的项目。
+                        锐宸科技由长期深度参与一线业务与个人服务场景的成员发起，团队规模刻意保持在“小而稳”的状态。
+                        相比铺开的业务线，我们更在意每一位正在服务的客户、每一段亲自经历的项目。
                     </p>
                     <p>
                         在具体工作中，我们有几个共识：
@@ -585,7 +597,7 @@
                         · 在合作层面，坦诚给出边界与预期，不承诺超出能力与条件的结果。
                     </p>
                     <p>
-                        我们相信，长期来看，真正有价值的服务是：在重要节点时刻，能帮客户多看清一点情况，
+                        我们相信，长期来看，有价值的服务是：在重要节点时刻，能帮客户多看清一点情况，
                         多想清一层后果，而不是制造更多噪音。
                     </p>
                 </div>
@@ -600,35 +612,35 @@
                 <div class="section-body">
                     <div class="biz-layout">
                         <div class="biz-label">
-                            当前，我们主要集中在以下几类服务方向，后续会根据实际需求与能力边界进行迭代。
+                            当前，我们主要集中在以下几类服务方向，后续会根据实际需求与能力边界持续迭代。
                         </div>
                         <div class="biz-items">
                             <div class="biz-item">
                                 <div class="biz-name">信息梳理与研究支持</div>
                                 <div class="biz-desc">
-                                    针对复杂项目或持续输出场景，协助客户整理零散信息、搭建资料结构、划分优先级，
+                                    针对复杂项目或持续输出场景，协助整理零散信息、搭建资料结构、划分优先级，
                                     让后续沟通与决策建立在更清晰的底层之上。
                                 </div>
                             </div>
                             <div class="biz-item">
                                 <div class="biz-name">流程优化与轻量顾问</div>
                                 <div class="biz-desc">
-                                    从实际工作流出发，对关键节点、协作方式与信息流转进行梳理，提出可执行的优化建议，
-                                    并在一段时间内跟进落地效果与调整。
+                                    从真实工作流出发，梳理关键节点、协作方式与信息流转，提出可执行的优化建议，
+                                    并在一段时间内跟进落地效果和必要调整。
                                 </div>
                             </div>
                             <div class="biz-item">
                                 <div class="biz-name">工具选型与小型“系统”搭建</div>
                                 <div class="biz-desc">
-                                    结合现有 SaaS 工具与 AI 能力，为企业或个人搭建适配的“工作台”：包括信息收集、
-                                    笔记/知识库、任务追踪、简单自动化等，重视可维护性，而非炫技。
+                                    结合现有 SaaS 工具与 AI 能力，为企业或个人搭建适配的“工作台”，
+                                    覆盖信息收集、笔记 / 知识库、任务追踪与简单自动化，重视可维护性，而非炫技。
                                 </div>
                             </div>
                             <div class="biz-item">
                                 <div class="biz-name">定制项目与长期合作</div>
                                 <div class="biz-desc">
-                                    针对不方便完全外包、又不适合自建团队的需求，以按阶段、按模块等方式进行合作，
-                                    保持沟通顺畅与节奏可控，尽量减少管理成本。
+                                    针对不适合完全外包、又不宜自建团队的需求，以按阶段或按模块的方式合作，
+                                    保持沟通顺畅与节奏可控，同时尽量压低管理成本。
                                 </div>
                             </div>
                         </div>
