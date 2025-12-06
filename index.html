@@ -20,7 +20,7 @@
             overflow-x: hidden;
         }
 
-        /* 轻微噪点/星点层，保持高级感，不是炫技 */
+        /* 轻微噪点/星点层 */
         body::before {
             content: "";
             position: fixed;
@@ -125,7 +125,7 @@
         }
 
         .brand-text-main {
-            font-size: 20px; /* 比之前更大一些，更大气 */
+            font-size: 20px;
             font-weight: 600;
             letter-spacing: 0.18em;
         }
@@ -136,7 +136,7 @@
             color: #9ca3af;
         }
 
-        /* 桌面导航（略微紧凑一点） */
+        /* 桌面导航 */
         .nav-links {
             display: flex;
             gap: 24px;
@@ -267,12 +267,12 @@
             border-bottom: none;
         }
 
-        /* 锚点偏移，避免被导航遮住 */
+        /* 锚点偏移 */
         section[id] {
             scroll-margin-top: 120px;
         }
 
-        /* 锚点高亮：不再闪边框，改为标题“呼吸”一次 */
+        /* 锚点高亮：标题“呼吸”一次 */
         section[id]:target .section-title {
             animation: titleBreath 1.4s ease-out;
         }
@@ -328,7 +328,6 @@
             margin-top: 10px;
         }
 
-        /* 业务板块布局：两列，但不是卡片 */
         .biz-layout {
             display: grid;
             grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.9fr);
@@ -460,7 +459,7 @@
             <div class="brand-logo"><span>RC</span></div>
             <div>
                 <div class="brand-text-main">锐宸科技</div>
-                <div class="brand-text-sub">Ruichen Tech · Wuhan</div>
+                <div class="brand-text-sub">Ruichen.Tech · Wuhan</div>
             </div>
         </div>
 
@@ -490,7 +489,7 @@
                     帮你把信息、工具和实际业务，接成一条更顺的路。
                 </h1>
                 <p class="hero-subtitle">
-                    锐宸科技位于武汉西北湖商圈，专注于信息梳理、流程设计与智能工具落地，
+                    武汉锐宸科技有限公司位于武汉西北湖金融商圈，专注于信息梳理、流程设计与智能工具落地，
                     在不打扰日常节奏的前提下，帮助企业和专业个体把关键节点做得更清楚、更稳妥。
                 </p>
             </div>
@@ -592,7 +591,8 @@
                         </p>
                         <div class="contact-row">
                             <span><strong>地址：</strong>武汉 · 西北湖 · 国金中心</span>
-                            <a href="https://yunzai.ruichen.tech" class="contact-link" target="_blank" rel="noopener noreferrer">
+                            <!-- 这里改动：去掉 target="_blank"、rel，改为当前页直接跳转 -->
+                            <a href="https://yunzai.ruichen.tech" class="contact-link">
                                 查看旗下品牌「云在」
                             </a>
                         </div>
