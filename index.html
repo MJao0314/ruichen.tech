@@ -219,8 +219,7 @@
 
         /* Hero：简洁抬头 */
         .hero {
-            /* 仅改这里：让第一眼 HERO 更大一些 */
-            padding: 74px 0 80px;
+            padding: 56px 0 64px;
             border-bottom: 1px solid rgba(31,41,55,0.8);
         }
 
@@ -244,18 +243,14 @@
             font-size: 30px;
             font-weight: 600;
             letter-spacing: 0.06em;
-            margin-bottom: 14px;
+            margin-bottom: 18px;
             color: #f9fafb;
         }
 
-        /* 新增：H1 下方的小字排版（只用于 HERO） */
-        .hero-mini {
-            font-size: 13px;
-            color: rgba(209, 213, 219, 0.92);
-            max-width: 780px;
-        }
-        .hero-mini p + p {
-            margin-top: 8px;
+        .hero-subtitle {
+            font-size: 15px;
+            color: #d1d5db;
+            max-width: 760px;
         }
 
         main {
@@ -415,7 +410,7 @@
         /* 响应式 */
         @media (max-width: 900px) {
             .hero {
-                padding-top: 54px;
+                padding-top: 40px;
             }
         }
 
@@ -484,26 +479,24 @@
 <div class="page">
     <div class="shell">
 
-        <!-- Hero：第一眼区域（仅调整这里的排版与文案） -->
+        <!-- Hero：简洁抬头 -->
         <section class="hero">
             <div class="hero-inner">
                 <div class="hero-tag">
-                    模型应用与工具集成服务
+                    信息系统与智能工具结合的轻量服务团队
                 </div>
                 <h1 class="hero-title">
-                    把主流模型能力，嵌入你的业务 workflow。
+                    帮你把信息、工具和实际业务，接成一条更顺的路。
                 </h1>
-
-                <!-- 新增：H1 下方的小字（从公司简介中“挪”一点内容过来） -->
-                <div class="hero-mini">
-                    <p>聚焦“数据—流程—权限—交付”链路，把模型能力接入现有系统与协作方式。</p>
-                    <p>长期跟进主流模型生态更新，为不同业务场景提供集成、配置与持续优化支持。</p>
-                </div>
+                <p class="hero-subtitle">
+                    武汉锐宸科技有限公司位于武汉西北湖金融商圈，专注于信息梳理、流程设计与智能工具落地，
+                    在不打扰日常节奏的前提下，帮助企业和专业个体把关键节点做得更清楚、更稳妥。
+                </p>
             </div>
         </section>
 
         <main>
-            <!-- 公司简介（仅缩短内容，其余不动） -->
+            <!-- 公司简介 -->
             <section id="company">
                 <div class="section-headline">
                     <div class="section-title">公司简介</div>
@@ -511,13 +504,17 @@
                 </div>
                 <div class="section-body">
                     <p>
-                        武汉锐宸科技有限公司位于武汉西北湖金融商圈，围绕业务场景提供模型应用方案、工具集成与交付支持，
-                        让信息与工具在实际流程中稳定运行并可持续迭代。
+                        锐宸科技是一家专注于“信息 + 工具 + 落地”的服务公司，围绕具体业务场景，
+                        为企业管理者、项目负责人和专业个体提供信息梳理、决策支持与工具配置。
+                    </p>
+                    <p>
+                        我们不做空泛的大规划，更关注：当下手头这个项目，该如何把信息理清，
+                        把流程捋顺，把合适的工具接上去，让团队可以更安静地把事推进下去。
                     </p>
                 </div>
             </section>
 
-            <!-- 关于我们（不动） -->
+            <!-- 关于我们 -->
             <section id="about">
                 <div class="section-headline">
                     <div class="section-title">关于我们</div>
@@ -538,7 +535,7 @@
                 </div>
             </section>
 
-            <!-- 业务板块（不动） -->
+            <!-- 业务板块 -->
             <section id="business">
                 <div class="section-headline">
                     <div class="section-title">业务板块</div>
@@ -576,7 +573,7 @@
                 </div>
             </section>
 
-            <!-- 联系我们（只保留电话 + 邮箱，其余删除） -->
+            <!-- 联系我们（仅此处有改动：保留电话/邮箱/地址，移除中间灰线效果来源的那行布局） -->
             <section id="contact">
                 <div class="section-headline">
                     <div class="section-title">联系我们</div>
@@ -591,6 +588,9 @@
                         <p>
                             <strong>邮箱：</strong>
                             <a href="mailto:ma@ruichen.tech">ma@ruichen.tech</a>
+                        </p>
+                        <p>
+                            <strong>地址：</strong>武汉 · 西北湖 · 国金中心
                         </p>
                     </div>
                 </div>
