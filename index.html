@@ -1,657 +1,746 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>锐宸科技 Ruichen.Tech</title>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
         html { scroll-behavior: smooth; }
 
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, Arial, sans-serif;
-            line-height: 1.8;
-            /* 分层的深紫 / 深蓝渐变，不是纯黑，也有层次 */
-            background:
-                radial-gradient(circle at 12% 0%, #3b2468 0, #120a2b 38%, #050716 85%),
-                radial-gradient(circle at 88% 110%, #2c1b55 0, #090715 40%, #040511 100%);
-            color: #e5e7eb;
-            position: relative;
-            overflow-x: hidden;
+        :root{
+            /* 背景与文字：提高亮度但不刺眼 */
+            --bg-deep: #070a16;
+            --bg-mid:  #0b1230;
+            --ink:     #eaf0ff;
+            --muted:   rgba(234, 240, 255, 0.72);
+            --line:    rgba(255, 255, 255, 0.10);
+
+            /* 紫蓝绿科技感点缀（克制） */
+            --accent1: rgba(147, 197, 253, 0.85); /* 蓝 */
+            --accent2: rgba(167, 139, 250, 0.75); /* 紫 */
+            --accent3: rgba(45, 212, 191, 0.55);  /* 绿蓝 */
+
+            --glass: rgba(16, 22, 48, 0.60);
+            --glass-strong: rgba(16, 22, 48, 0.78);
         }
 
-        /* 轻微噪点/星点层 */
-        body::before {
-            content: "";
+        body{
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, Arial, sans-serif;
+            line-height: 1.8;
+            color: var(--ink);
+            overflow-x: hidden;
+
+            /* 分层渐变：更亮、更有层次，且上下呼应 */
+            background:
+                radial-gradient(900px 520px at 16% 10%, rgba(167,139,250,0.26), rgba(7,10,22,0) 60%),
+                radial-gradient(760px 520px at 84% 18%, rgba(45,212,191,0.16), rgba(7,10,22,0) 62%),
+                radial-gradient(820px 560px at 22% 108%, rgba(147,197,253,0.18), rgba(7,10,22,0) 62%),
+                radial-gradient(860px 560px at 86% 112%, rgba(167,139,250,0.22), rgba(7,10,22,0) 62%),
+                linear-gradient(180deg, #0b1230 0%, #070a16 55%, #0a1030 100%);
+        }
+
+        /* 轻微星点噪点层：更“宇宙感”，但不影响阅读 */
+        body::before{
+            content:"";
             position: fixed;
             inset: 0;
-            pointer-events: none;
+            pointer-events:none;
             background-image:
-                radial-gradient(#ffffff15 1px, transparent 1px),
-                radial-gradient(#ffffff0d 1px, transparent 1px);
-            background-size: 160px 160px, 260px 260px;
-            background-position: 0 0, 80px 100px;
+                radial-gradient(#ffffff18 1px, transparent 1px),
+                radial-gradient(#ffffff10 1px, transparent 1px);
+            background-size: 180px 180px, 280px 280px;
+            background-position: 0 0, 90px 120px;
             mix-blend-mode: screen;
-            opacity: 0.36;
+            opacity: 0.30;
             z-index: -1;
         }
 
-        .page {
+        .page{
             min-height: 100vh;
-            padding: 88px 24px 60px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            padding: 92px 24px 78px;
+            display:flex;
+            justify-content:center;
         }
 
-        .shell {
-            width: 100%;
+        .shell{
+            width:100%;
             max-width: 1200px;
         }
 
         /* 顶部导航：悬浮 + 下滑隐藏 / 上滑显示 */
-        .topbar {
+        .topbar{
             position: fixed;
             top: 0;
             left: 50%;
             transform: translateX(-50%);
             width: 100%;
             max-width: 1200px;
-            padding: 10px 20px 10px;
             z-index: 1000;
-            transition: transform 0.25s ease, opacity 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+
+            padding: 10px 18px;
             border-radius: 0 0 18px 18px;
-            background: rgba(10, 12, 26, 0.96);
+
+            background: linear-gradient(180deg, rgba(20,26,56,0.86), rgba(16,22,48,0.70));
+            backdrop-filter: blur(16px);
             box-shadow:
-                0 16px 48px rgba(0,0,0,0.85),
-                0 0 0 1px rgba(55,65,81,0.9);
-            backdrop-filter: blur(18px);
+                0 18px 60px rgba(0,0,0,0.55),
+                0 0 0 1px rgba(255,255,255,0.10);
+            transition: transform 0.25s ease, opacity 0.25s ease, box-shadow 0.25s ease;
         }
 
-        .topbar-inner {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .topbar.nav-hidden {
+        .topbar.nav-hidden{
             transform: translate(-50%, -120%);
             opacity: 0;
             box-shadow: none;
         }
 
-        .brand {
-            display: flex;
-            align-items: center;
-            gap: 10px;
+        .topbar-inner{
+            display:flex;
+            align-items:center;
+            justify-content:space-between;
+            gap: 14px;
         }
 
-        .brand-logo {
+        .brand{
+            display:flex;
+            align-items:center;
+            gap: 12px;
+            min-width: 220px;
+        }
+
+        /* RC 图标：更高级、轻微“流光”但不廉价 */
+        .brand-logo{
             position: relative;
-            width: 36px;
-            height: 36px;
-            border-radius: 12px;
+            width: 38px;
+            height: 38px;
+            border-radius: 14px;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            overflow:hidden;
+
             background:
-                radial-gradient(circle at 20% 0%, #f9fafb 0, #18122f 55%, #050716 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 16px;
-            font-weight: 600;
-            color: #f9fafb;
+                radial-gradient(circle at 20% 0%, rgba(255,255,255,0.95), rgba(167,139,250,0.18) 26%, rgba(11,18,48,1) 70%),
+                linear-gradient(135deg, rgba(45,212,191,0.16), rgba(147,197,253,0.10));
             box-shadow:
-                0 16px 40px rgba(0,0,0,0.9),
-                0 0 0 1px rgba(148,163,184,0.7);
-            overflow: hidden;
+                0 18px 48px rgba(0,0,0,0.60),
+                0 0 0 1px rgba(255,255,255,0.14);
+        }
+        .brand-logo::after{
+            content:"";
+            position:absolute;
+            inset:-60% -40%;
+            background: linear-gradient(120deg, transparent 35%, rgba(255,255,255,0.18) 50%, transparent 65%);
+            transform: rotate(12deg);
+            animation: logoSheen 6.5s ease-in-out infinite;
+            opacity: 0.75;
+        }
+        @keyframes logoSheen{
+            0%, 60% { transform: translateX(-20%) rotate(12deg); opacity: 0.0; }
+            70% { opacity: 0.65; }
+            100% { transform: translateX(45%) rotate(12deg); opacity: 0.0; }
+        }
+        .brand-logo span{
+            position:relative;
+            z-index:1;
+            font-size: 16px;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            color: rgba(255,255,255,0.96);
         }
 
-        .brand-logo::before {
-            content: "";
-            position: absolute;
-            inset: 2px;
-            border-radius: inherit;
-            background:
-                linear-gradient(135deg,
-                    rgba(249,250,251,0.18),
-                    rgba(15,23,42,1),
-                    rgba(156,163,175,0.3));
-            mix-blend-mode: soft-light;
-            opacity: 0.9;
+        .brand-text-main{
+            font-size: 22px;              /* 更大气 */
+            font-weight: 650;
+            letter-spacing: 0.16em;
         }
-
-        .brand-logo span {
-            position: relative;
-            z-index: 1;
-        }
-
-        .brand-text-main {
-            font-size: 20px;
-            font-weight: 600;
-            letter-spacing: 0.18em;
-        }
-
-        .brand-text-sub {
+        .brand-text-sub{
+            margin-top: 2px;
             font-size: 12px;
-            opacity: 0.7;
-            color: #9ca3af;
+            color: rgba(234,240,255,0.62);
+            letter-spacing: 0.06em;
         }
 
-        /* 桌面导航 */
-        .nav-links {
-            display: flex;
-            gap: 24px;
-            font-size: 14px;
-            font-weight: 500;
+        /* 导航：纯文字，不做椭圆/胶囊 */
+        .nav-links{
+            display:flex;
+            align-items:center;
+            gap: 18px;
+            font-size: 13px;
+            font-weight: 560;
+            letter-spacing: 0.10em;
+            color: rgba(234,240,255,0.86);
+            user-select:none;
         }
 
-        .nav-links a {
-            text-decoration: none;
-            color: #e5e7eb;
-            opacity: 0.84;
-            position: relative;
-            padding-bottom: 2px;
-            letter-spacing: 0.12em;
+        .nav-links a{
+            text-decoration:none;
+            color: inherit;
+            opacity: 0.86;
+            padding: 8px 2px;
+            position:relative;
         }
-
-        .nav-links a::after {
-            content: "";
-            position: absolute;
-            left: 0;
-            bottom: -3px;
-            width: 0;
-            height: 1px;
-            background: linear-gradient(90deg, #e5e7eb, #a5b4fc);
-            transition: width 0.22s ease;
-        }
-
-        .nav-links a:hover {
+        .nav-links a:hover{
             opacity: 1;
         }
-
-        .nav-links a:hover::after {
+        .nav-links a::after{
+            content:"";
+            position:absolute;
+            left: 0;
+            bottom: 3px;
+            width: 0;
+            height: 1px;
+            background: linear-gradient(90deg, rgba(147,197,253,0.95), rgba(45,212,191,0.65));
+            transition: width 0.22s ease;
+            opacity: 0.9;
+        }
+        .nav-links a:hover::after{
             width: 100%;
         }
 
-        /* 手机端菜单按钮 */
-        .menu-toggle {
-            display: none;
-            width: 32px;
-            height: 32px;
-            border-radius: 999px;
-            border: 1px solid rgba(148,163,184, 0.6);
-            background: radial-gradient(circle at 0% 0%, #1e1638 0, #050716 85%);
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
+        /* 点击导航：整排导航文字一起轻微呼吸一次（幅度克制） */
+        .nav-links.nav-breath{
+            animation: navBreath 1.05s ease-out;
         }
-        .menu-toggle span {
-            display: block;
+        @keyframes navBreath{
+            0%   { transform: translateY(0); filter: brightness(1); }
+            35%  { transform: translateY(-1px); filter: brightness(1.12); }
+            100% { transform: translateY(0); filter: brightness(1); }
+        }
+
+        /* 手机端菜单按钮 */
+        .menu-toggle{
+            display:none;
+            width: 34px;
+            height: 34px;
+            border-radius: 999px;
+            border: 1px solid rgba(255,255,255,0.16);
+            background: linear-gradient(180deg, rgba(20,26,56,0.86), rgba(16,22,48,0.70));
+            backdrop-filter: blur(14px);
+            align-items:center;
+            justify-content:center;
+            cursor:pointer;
+        }
+        .menu-toggle span{
+            display:block;
             width: 16px;
             height: 2px;
-            background: #e5e7eb;
-            position: relative;
+            background: rgba(234,240,255,0.92);
+            position:relative;
         }
         .menu-toggle span::before,
-        .menu-toggle span::after {
-            content: "";
-            position: absolute;
-            left: 0;
-            width: 16px;
-            height: 2px;
-            background: #e5e7eb;
+        .menu-toggle span::after{
+            content:"";
+            position:absolute;
+            left:0;
+            width:16px;
+            height:2px;
+            background: rgba(234,240,255,0.92);
         }
-        .menu-toggle span::before {
-            top: -5px;
-        }
-        .menu-toggle span::after {
-            top: 5px;
-        }
+        .menu-toggle span::before{ top:-5px; }
+        .menu-toggle span::after{ top:5px; }
 
-        .topbar.menu-open {
+        .topbar.menu-open{
             box-shadow:
-                0 24px 70px rgba(0,0,0,0.95),
-                0 0 0 1px rgba(55,65,81,1);
+                0 26px 80px rgba(0,0,0,0.62),
+                0 0 0 1px rgba(255,255,255,0.12);
         }
 
-        .topbar.menu-open .nav-links {
-            display: flex;
+        /* Hero + 公司简介同屏：纵向排列，第一眼看到两块 */
+        .above-fold{
+            padding: 44px 0 28px;
+            border-bottom: 1px solid var(--line);
         }
 
-        /* Hero：简洁抬头 */
-        .hero {
-            padding: 56px 0 64px;
-            border-bottom: 1px solid rgba(31,41,55,0.8);
+        .hero{
+            max-width: 920px;
         }
 
-        .hero-inner {
-            max-width: 860px;
-        }
-
-        .hero-tag {
-            display: inline-flex;
-            align-items: center;
-            padding: 3px 11px;
+        .hero-tag{
+            display:inline-flex;
+            align-items:center;
+            padding: 4px 12px;
             border-radius: 999px;
-            border: 1px solid rgba(156,163,175,0.7);
-            background: rgba(15,23,42,0.78);
+            border: 1px solid rgba(255,255,255,0.14);
+            background: rgba(16,22,48,0.52);
+            backdrop-filter: blur(10px);
             font-size: 12px;
-            color: #e5e7eb;
-            margin-bottom: 18px;
-        }
-
-        .hero-title {
-            font-size: 30px;
-            font-weight: 600;
+            color: rgba(234,240,255,0.86);
+            margin-bottom: 16px;
             letter-spacing: 0.06em;
-            margin-bottom: 18px;
-            color: #f9fafb;
         }
 
-        .hero-subtitle {
+        .hero-title{
+            font-size: 34px;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            color: rgba(255,255,255,0.96);
+            margin-bottom: 14px;
+        }
+
+        .hero-subtitle{
             font-size: 15px;
-            color: #d1d5db;
-            max-width: 760px;
+            color: rgba(234,240,255,0.78);
+            max-width: 820px;
         }
 
-        main {
-            padding-top: 14px;
+        /* 公司简介（第一眼第二块，置于 Hero 下方，不在右边） */
+        .company-snapshot{
+            margin-top: 26px;
+            padding-top: 22px;
+            border-top: 1px solid rgba(255,255,255,0.08);
+            max-width: 920px;
+        }
+        .company-snapshot .kicker{
+            font-size: 12px;
+            color: rgba(234,240,255,0.66);
+            letter-spacing: 0.10em;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+        .company-snapshot .text{
+            font-size: 15px;
+            color: rgba(234,240,255,0.84);
+        }
+        .company-snapshot .text strong{
+            color: rgba(255,255,255,0.96);
+            font-weight: 650;
         }
 
-        section[id] {
-            position: relative;
-            padding: 56px 0;
-            border-bottom: 1px solid rgba(31,41,55,0.9);
+        main{
+            padding-top: 10px;
         }
 
-        section[id]:last-of-type {
-            border-bottom: none;
-        }
-
-        /* 锚点偏移 */
-        section[id] {
+        section[id]{
+            padding: 68px 0;                 /* 页面更“长”，不挤 */
+            border-bottom: 1px solid var(--line);
             scroll-margin-top: 120px;
         }
+        section[id]:last-of-type{ border-bottom: none; }
 
-        /* 锚点高亮：标题“呼吸”一次 */
-        section[id]:target .section-title {
-            animation: titleBreath 1.4s ease-out;
-        }
-
-        @keyframes titleBreath {
-            0% {
-                transform: scale(1);
-                text-shadow: 0 0 0 rgba(199,210,254,0);
-                color: #f9fafb;
-            }
-            35% {
-                transform: scale(1.06);
-                text-shadow: 0 0 18px rgba(199,210,254,0.9);
-                color: #ffffff;
-            }
-            70% {
-                transform: scale(1.02);
-                text-shadow: 0 0 8px rgba(199,210,254,0.5);
-                color: #e5e7eb;
-            }
-            100% {
-                transform: scale(1);
-                text-shadow: 0 0 0 rgba(199,210,254,0);
-                color: #f9fafb;
-            }
-        }
-
-        .section-headline {
+        .section-headline{
             margin-bottom: 18px;
         }
-
-        .section-title {
+        .section-title{
             font-size: 20px;
-            font-weight: 600;
-            letter-spacing: 0.16em;
-            text-transform: uppercase;
-            color: #f9fafb;
+            font-weight: 700;
+            letter-spacing: 0.14em;
+            color: rgba(255,255,255,0.95);
             margin-bottom: 6px;
         }
-
-        .section-subtitle {
+        .section-subtitle{
             font-size: 13px;
-            color: #9ca3af;
+            color: rgba(234,240,255,0.62);
+            letter-spacing: 0.04em;
         }
 
-        .section-body {
+        .section-body{
+            max-width: 920px;
             font-size: 15px;
-            color: #e5e7eb;
-            max-width: 900px;
+            color: rgba(234,240,255,0.84);
+        }
+        .section-body p + p{ margin-top: 10px; }
+
+        /* 到达锚点：标题轻微呼吸一次（幅度收敛） */
+        section[id]:target .section-title{
+            animation: titleBreath 1.05s ease-out;
+        }
+        @keyframes titleBreath{
+            0%   { transform: scale(1); text-shadow: 0 0 0 rgba(147,197,253,0); }
+            40%  { transform: scale(1.02); text-shadow: 0 0 14px rgba(147,197,253,0.35); }
+            100% { transform: scale(1); text-shadow: 0 0 0 rgba(147,197,253,0); }
         }
 
-        .section-body p + p {
-            margin-top: 10px;
-        }
-
-        .biz-layout {
-            display: grid;
-            grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.9fr);
+        /* 业务板块：非卡片，清晰分条 */
+        .biz-layout{
+            display:grid;
+            grid-template-columns: minmax(0, 1.05fr) minmax(0, 1.95fr);
             gap: 32px;
-            align-items: flex-start;
+            align-items:flex-start;
+            margin-top: 6px;
         }
-
-        .biz-label {
+        .biz-label{
             font-size: 13px;
-            color: #9ca3af;
+            color: rgba(234,240,255,0.62);
         }
-
-        .biz-items {
+        .biz-items{
             font-size: 14px;
-            color: #e5e7eb;
+            color: rgba(234,240,255,0.86);
         }
-
-        .biz-item {
-            margin-bottom: 18px;
+        .biz-item{
+            padding: 14px 0;
+            border-top: 1px solid rgba(255,255,255,0.08);
         }
-
-        .biz-name {
-            font-weight: 600;
-            margin-bottom: 4px;
+        .biz-item:first-child{ border-top: none; padding-top: 0; }
+        .biz-name{
+            font-weight: 700;
+            margin-bottom: 6px;
+            color: rgba(255,255,255,0.95);
         }
-
-        .biz-desc {
-            color: #d1d5db;
+        .biz-desc{
+            color: rgba(234,240,255,0.78);
         }
 
         /* 联系方式 */
-        .contact-lines {
+        .contact-lines{
+            max-width: 920px;
             font-size: 15px;
-            color: #e5e7eb;
         }
-
-        .contact-lines p {
-            margin-bottom: 10px;
+        .contact-lines p{ margin-bottom: 10px; }
+        .contact-lines a{
+            color: rgba(234,240,255,0.92);
+            text-decoration:none;
+            border-bottom: 1px solid rgba(147,197,253,0.0);
+            transition: border-color 0.18s ease, opacity 0.18s ease;
         }
-
-        .contact-lines a {
-            color: #e5e7eb;
-            text-decoration: none;
+        .contact-lines a:hover{
+            border-color: rgba(147,197,253,0.55);
+            opacity: 1;
         }
-
-        .contact-lines a:hover {
-            text-decoration: underline;
-        }
-
-        .contact-row {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 12px;
+        .contact-row{
+            display:flex;
+            align-items:center;
+            justify-content:space-between;
+            gap: 14px;
             margin-top: 6px;
+            padding-top: 10px;
+            border-top: 1px solid rgba(255,255,255,0.08);
         }
+        .contact-row span{ flex: 1; }
 
-        .contact-row span {
-            flex: 1;
-        }
-
-        .contact-link {
+        .contact-link{
             font-size: 13px;
-            color: #9ca3af;
-            text-decoration: none;
+            color: rgba(234,240,255,0.70);
+            text-decoration:none;
             white-space: nowrap;
         }
-
-        .contact-link:hover {
-            text-decoration: underline;
+        .contact-link:hover{
+            color: rgba(234,240,255,0.92);
         }
 
-        footer {
-            margin-top: 32px;
+        footer{
+            margin-top: 34px;
+            padding-top: 18px;
+            border-top: 1px solid rgba(255,255,255,0.10);
             font-size: 12px;
-            color: #6b7280;
-            text-align: center;
+            color: rgba(234,240,255,0.52);
+            text-align:center;
+
+            /* 底部也补同色系光感，避免“太黑” */
+            background:
+                radial-gradient(700px 260px at 20% 120%, rgba(45,212,191,0.10), rgba(0,0,0,0) 60%),
+                radial-gradient(760px 280px at 82% 120%, rgba(167,139,250,0.14), rgba(0,0,0,0) 62%);
+        }
+
+        /* 右下角返回顶部按钮（保留） */
+        .to-top{
+            position: fixed;
+            right: 18px;
+            bottom: 18px;
+            z-index: 999;
+            width: 44px;
+            height: 44px;
+            border-radius: 999px;
+            border: 1px solid rgba(255,255,255,0.14);
+            background: rgba(16,22,48,0.62);
+            backdrop-filter: blur(14px);
+            box-shadow: 0 18px 50px rgba(0,0,0,0.45);
+            color: rgba(234,240,255,0.92);
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            text-decoration:none;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: opacity 0.2s ease, transform 0.2s ease;
+            pointer-events:none;
+        }
+        .to-top.show{
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events:auto;
+        }
+        .to-top:hover{
+            border-color: rgba(147,197,253,0.28);
         }
 
         /* 响应式 */
-        @media (max-width: 900px) {
-            .hero {
-                padding-top: 40px;
-            }
+        @media (max-width: 900px){
+            .hero-title{ font-size: 28px; }
+            .above-fold{ padding-top: 36px; }
         }
 
-        @media (max-width: 768px) {
-            .page {
-                padding: 76px 14px 40px;
-            }
-            .topbar {
-                padding-inline: 16px;
-                border-radius: 0 0 14px 14px;
-            }
-            .menu-toggle {
-                display: flex;
-            }
-            .nav-links {
-                display: none;
-                position: absolute;
-                right: 16px;
+        @media (max-width: 768px){
+            .page{ padding: 82px 14px 70px; }
+            .topbar{ padding: 10px 14px; border-radius: 0 0 14px 14px; }
+            .brand{ min-width: unset; }
+            .menu-toggle{ display:flex; }
+
+            .nav-links{
+                display:none;
+                position:absolute;
+                right: 14px;
                 top: 100%;
                 margin-top: 10px;
                 flex-direction: column;
-                gap: 10px;
-                background: rgba(10,12,26,0.98);
-                padding: 10px 14px;
+                gap: 6px;
+                padding: 10px 12px;
                 border-radius: 14px;
+                background: rgba(16,22,48,0.82);
+                backdrop-filter: blur(16px);
                 box-shadow:
-                    0 20px 60px rgba(0,0,0,0.95),
-                    0 0 0 1px rgba(31,41,55,1);
+                    0 22px 70px rgba(0,0,0,0.55),
+                    0 0 0 1px rgba(255,255,255,0.10);
             }
-            .topbar.menu-open .nav-links {
-                display: flex;
-            }
-            .hero-title {
-                font-size: 24px;
-            }
-            .biz-layout {
-                grid-template-columns: minmax(0, 1fr);
-            }
+            .topbar.menu-open .nav-links{ display:flex; }
+
+            .biz-layout{ grid-template-columns: minmax(0, 1fr); }
+        }
+
+        @media (prefers-reduced-motion: reduce){
+            html{ scroll-behavior: auto; }
+            .brand-logo::after{ animation: none; }
+            .nav-links.nav-breath{ animation: none; }
+            section[id]:target .section-title{ animation: none; }
         }
     </style>
 </head>
+
 <body>
-<div class="topbar" id="topbar">
-    <div class="topbar-inner">
-        <div class="brand">
-            <div class="brand-logo"><span>RC</span></div>
-            <div>
-                <div class="brand-text-main">锐宸科技</div>
-                <div class="brand-text-sub">Ruichen.Tech · Wuhan</div>
+    <div class="topbar" id="topbar">
+        <div class="topbar-inner">
+            <div class="brand">
+                <div class="brand-logo" aria-label="Ruichen Tech Logo"><span>RC</span></div>
+                <div>
+                    <div class="brand-text-main">锐宸科技</div>
+                    <div class="brand-text-sub">Ruichen.Tech · Wuhan</div>
+                </div>
             </div>
+
+            <nav class="nav-links" id="navLinks">
+                <a href="#company">公司简介</a>
+                <a href="#about">关于我们</a>
+                <a href="#business">业务板块</a>
+                <a href="#contact">联系我们</a>
+            </nav>
+
+            <button class="menu-toggle" id="menuToggle" aria-label="打开导航">
+                <span></span>
+            </button>
         </div>
-
-        <nav class="nav-links">
-            <a href="#company">公司简介</a>
-            <a href="#about">关于我们</a>
-            <a href="#business">业务板块</a>
-            <a href="#contact">联系我们</a>
-        </nav>
-
-        <button class="menu-toggle" id="menuToggle" aria-label="打开导航">
-            <span></span>
-        </button>
     </div>
-</div>
 
-<div class="page">
-    <div class="shell">
+    <div class="page" id="top">
+        <div class="shell">
 
-        <!-- Hero：简洁抬头 -->
-        <section class="hero">
-            <div class="hero-inner">
-                <div class="hero-tag">
-                    信息系统与智能工具结合的轻量服务团队
-                </div>
-                <h1 class="hero-title">
-                    帮你把信息、工具和实际业务，接成一条更顺的路。
-                </h1>
-                <p class="hero-subtitle">
-                    武汉锐宸科技有限公司位于武汉西北湖金融商圈，专注于信息梳理、流程设计与智能工具落地，
-                    在不打扰日常节奏的前提下，帮助企业和专业个体把关键节点做得更清楚、更稳妥。
-                </p>
-            </div>
-        </section>
-
-        <main>
-            <!-- 公司简介 -->
-            <section id="company">
-                <div class="section-headline">
-                    <div class="section-title">公司简介</div>
-                    <div class="section-subtitle">信息系统与智能工具结合的服务提供方</div>
-                </div>
-                <div class="section-body">
-                    <p>
-                        锐宸科技是一家专注于“信息 + 工具 + 落地”的服务公司，围绕具体业务场景，
-                        为企业管理者、项目负责人和专业个体提供信息梳理、决策支持与工具配置。
-                    </p>
-                    <p>
-                        我们不做空泛的大规划，更关注：当下手头这个项目，该如何把信息理清，
-                        把流程捋顺，把合适的工具接上去，让团队可以更安静地把事推进下去。
+            <!-- 第一眼：Hero + 公司简介（纵向同屏） -->
+            <section class="above-fold">
+                <div class="hero">
+                    <div class="hero-tag">模型应用与工具集成服务</div>
+                    <h1 class="hero-title">把主流模型能力，嵌入你的业务 workflow。</h1>
+                    <p class="hero-subtitle">
+                        我们围绕真实场景交付：从需求拆解、方案设计到上线运行，提供可复用的 SOP 与可调用的 API 形态能力，
+                        支持知识库、信息检索、内容生产、自动化与管理协同，并长期跟进主流模型生态更新。
                     </p>
                 </div>
-            </section>
 
-            <!-- 关于我们 -->
-            <section id="about">
-                <div class="section-headline">
-                    <div class="section-title">关于我们</div>
-                    <div class="section-subtitle">方法论清楚，协作方式简单</div>
-                </div>
-                <div class="section-body">
-                    <p>
-                        团队成员长期在一线业务和个人服务场景中工作，对“信息太杂、沟通成本高、工具用不起来”这些常见问题，会先从拆解和排序开始，而不是一上来堆概念。
-                    </p>
-                    <p>
-                        在合作中，我们更看重几件事：
-                    </p>
-                    <p>
-                        · 把“事实、判断、假设”拆开说清楚，避免混在一起决策；<br>
-                        · 重视节奏和可执行性，而不是只停留在方案文档里；<br>
-                        · 预先说明边界与预期，让每一方都清楚这段合作能解决什么、不能解决什么。
-                    </p>
-                </div>
-            </section>
-
-            <!-- 业务板块 -->
-            <section id="business">
-                <div class="section-headline">
-                    <div class="section-title">业务板块</div>
-                    <div class="section-subtitle">围绕信息与智能工具的三个主要方向</div>
-                </div>
-                <div class="section-body">
-                    <div class="biz-layout">
-                        <div class="biz-label">
-                            当前，我们主要在这些方向上提供中长期支持，并长期跟进主流模型生态更新。
-                        </div>
-                        <div class="biz-items">
-                            <div class="biz-item">
-                                <div class="biz-name">信息梳理与决策支持</div>
-                                <div class="biz-desc">
-                                    针对复杂项目、跨部门协作或长期输出场景，对分散的信息进行结构化整理，
-                                    提炼关键问题和决策节点，让后续沟通建立在同一底层事实之上。
-                                </div>
-                            </div>
-                            <div class="biz-item">
-                                <div class="biz-name">流程设计与协作优化</div>
-                                <div class="biz-desc">
-                                    从实际工作流程出发，对关键步骤、角色边界和交付节奏做重新设计，
-                                    配合简单清晰的协作规范，减少反复沟通和“隐性成本”。
-                                </div>
-                            </div>
-                            <div class="biz-item">
-                                <div class="biz-name">智能工具选型与集成</div>
-                                <div class="biz-desc">
-                                    结合主流 AI 与 SaaS 工具，为客户搭建适配的“工作台”——包括知识库、
-                                    任务流、自动化小流程等，强调可维护和可持续使用，而不是一次性展示。
-                                </div>
-                            </div>
-                        </div>
+                <div class="company-snapshot" aria-label="Company Snapshot">
+                    <div class="kicker">Company</div>
+                    <div class="text">
+                        <strong>武汉锐宸科技有限公司</strong> 位于武汉西北湖核心商圈，
+                        面向企业与项目团队提供“模型能力落地 + 系统对接 + 交付运营”的一体化支持，
+                        目标是让工具真正进入日常业务链路并持续可用。
                     </div>
                 </div>
             </section>
 
-            <!-- 联系我们：仅此段改动（保留电话/邮箱/地址；删除邮箱与地址之间的“灰线来源结构”和后续链接） -->
-            <section id="contact">
-                <div class="section-headline">
-                    <div class="section-title">联系我们</div>
-                    <div class="section-subtitle">当你有具体项目或想法需要落地时</div>
-                </div>
-                <div class="section-body">
-                    <div class="contact-lines">
+            <main>
+                <!-- 公司简介 -->
+                <section id="company">
+                    <div class="section-headline">
+                        <div class="section-title">公司简介</div>
+                        <div class="section-subtitle">模型能力落地 · 系统对接 · 交付运营</div>
+                    </div>
+                    <div class="section-body">
                         <p>
-                            <strong>电话：</strong>
-                            <a href="tel:15623312393">156-2331-2393</a>
+                            锐宸科技聚焦“把模型用起来”：将主流模型能力与业务系统衔接，形成稳定的使用路径与管理机制。
+                            我们关注上线后的效果、维护与迭代，而不仅是一次性的演示与交付。
                         </p>
                         <p>
-                            <strong>邮箱：</strong>
-                            <a href="mailto:ma@ruichen.tech">ma@ruichen.tech</a>
-                        </p>
-                        <p>
-                            <strong>地址：</strong>武汉 · 西北湖 · 国金中心
+                            在项目推进中，我们通常从“数据与流程的关键节点”入手，明确输入输出、权限边界与责任链，
+                            再将工具能力接入现有协作体系，降低学习成本与重复沟通。
                         </p>
                     </div>
-                </div>
-            </section>
-        </main>
+                </section>
 
-        <footer>
-            © 锐宸科技 Ruichen Tech. All rights reserved.
-        </footer>
+                <!-- 关于我们 -->
+                <section id="about">
+                    <div class="section-headline">
+                        <div class="section-title">关于我们</div>
+                        <div class="section-subtitle">以工程化方式交付，以结果为导向迭代</div>
+                    </div>
+                    <div class="section-body">
+                        <p>
+                            我们以项目制推进工作：先对目标、约束、风险和验收口径达成一致，再进入方案与实施。
+                            所有能力以可复用的流程与组件沉淀，便于后续扩展与维护。
+                        </p>
+                        <p>
+                            同时，我们坚持基础原则：数据与权限分级、信息可追溯、变更可回滚、交付可验收。
+                            在合规与安全边界内完成效率提升，是我们默认的工作方式。
+                        </p>
+                    </div>
+                </section>
 
+                <!-- 业务板块（沿用你之前“非卡片 + 分条”的结构） -->
+                <section id="business">
+                    <div class="section-headline">
+                        <div class="section-title">业务板块</div>
+                        <div class="section-subtitle">覆盖多行业场景的模型应用与系统集成</div>
+                    </div>
+                    <div class="section-body">
+                        <div class="biz-layout">
+                            <div class="biz-label">
+                                业务能力围绕三条主线展开：场景建模、工具集成、上线运营。长期跟进主流模型生态更新，确保方案持续可用。
+                            </div>
+                            <div class="biz-items">
+                                <div class="biz-item">
+                                    <div class="biz-name">模型应用方案与场景建模</div>
+                                    <div class="biz-desc">
+                                        将业务目标拆解为可执行链路，明确数据来源、流程节点与产出标准，形成可落地的应用方案与验收口径。
+                                    </div>
+                                </div>
+                                <div class="biz-item">
+                                    <div class="biz-name">主流工具接入与系统集成</div>
+                                    <div class="biz-desc">
+                                        对接主流工具与企业系统，建设知识库与检索链路，打通内容生产、信息共享与协作流程，减少碎片化操作。
+                                    </div>
+                                </div>
+                                <div class="biz-item">
+                                    <div class="biz-name">运营与持续优化</div>
+                                    <div class="biz-desc">
+                                        提供上线后的运行监控、反馈闭环与版本迭代策略，让能力随业务变化持续演进，而不是“上线即结束”。
+                                    </div>
+                                </div>
+                                <div class="biz-item">
+                                    <div class="biz-name">管理协同与信息看板</div>
+                                    <div class="biz-desc">
+                                        面向管理与项目角色，建立关键指标与信息流转机制，提升协作透明度与决策效率，减少重复沟通成本。
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 联系我们（保留云在入口 + 返回顶部按钮另在右下角） -->
+                <section id="contact">
+                    <div class="section-headline">
+                        <div class="section-title">联系我们</div>
+                        <div class="section-subtitle">合作沟通 · 项目对接 · 需求评估</div>
+                    </div>
+                    <div class="section-body">
+                        <div class="contact-lines">
+                            <p>
+                                <strong>电话：</strong>
+                                <a href="tel:15623312393">156-2331-2393</a> /
+                                <a href="tel:13638612385">136-3861-2385</a>
+                            </p>
+                            <p>
+                                <strong>邮箱：</strong>
+                                <a href="mailto:ma@ruichen.tech">ma@ruichen.tech</a> /
+                                <a href="mailto:yuan@ruichen.tech">yuan@ruichen.tech</a>
+                            </p>
+                            <div class="contact-row">
+                                <span><strong>地址：</strong>武汉 · 西北湖 · 国金中心</span>
+                                <a href="https://yunzai.ruichen.tech" class="contact-link">查看旗下品牌「云在」</a>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </main>
+
+            <footer>
+                © 武汉锐宸科技有限公司 Ruichen Tech. All rights reserved.
+            </footer>
+
+        </div>
     </div>
-</div>
 
-<script>
-    // 顶部导航：下滑隐藏，上滑显示；鼠标到顶部也显示；手机端菜单开关
-    (function() {
-        var topbar = document.getElementById('topbar');
-        var lastScrollY = window.scrollY;
-        var menuToggle = document.getElementById('menuToggle');
-        var navLinks = topbar.querySelector('.nav-links');
+    <!-- 返回顶部（保留） -->
+    <a href="#top" class="to-top" id="toTop" aria-label="返回顶部">↑</a>
 
-        function handleScroll() {
-            var currentY = window.scrollY;
-            if (currentY > lastScrollY && currentY > 120) {
-                topbar.classList.add('nav-hidden');
-                topbar.classList.remove('menu-open');
-            } else {
-                topbar.classList.remove('nav-hidden');
-            }
-            lastScrollY = currentY;
-        }
+    <script>
+        (function () {
+            var topbar = document.getElementById('topbar');
+            var lastScrollY = window.scrollY;
 
-        function handleMouseMove(e) {
-            if (e.clientY < 70) {
-                topbar.classList.remove('nav-hidden');
-            }
-        }
+            var menuToggle = document.getElementById('menuToggle');
+            var navLinks = document.getElementById('navLinks');
 
-        if (menuToggle) {
-            menuToggle.addEventListener('click', function() {
-                if (topbar.classList.contains('menu-open')) {
+            var toTop = document.getElementById('toTop');
+
+            function handleScroll() {
+                var currentY = window.scrollY;
+
+                // 下滑隐藏 / 上滑显示
+                if (currentY > lastScrollY && currentY > 140) {
+                    topbar.classList.add('nav-hidden');
                     topbar.classList.remove('menu-open');
                 } else {
                     topbar.classList.remove('nav-hidden');
-                    topbar.classList.add('menu-open');
                 }
-            });
-        }
 
-        if (navLinks) {
-            navLinks.addEventListener('click', function(e) {
-                if (e.target.tagName.toLowerCase() === 'a') {
-                    topbar.classList.remove('menu-open');
+                // 返回顶部按钮显隐
+                if (currentY > 520) {
+                    toTop.classList.add('show');
+                } else {
+                    toTop.classList.remove('show');
                 }
-            });
-        }
 
-        window.addEventListener('scroll', handleScroll, { passive: true });
-        window.addEventListener('mousemove', handleMouseMove);
-    })();
-</script>
+                lastScrollY = currentY;
+            }
 
+            function handleMouseMove(e) {
+                if (e.clientY < 70) {
+                    topbar.classList.remove('nav-hidden');
+                }
+            }
+
+            // 手机端汉堡菜单
+            if (menuToggle) {
+                menuToggle.addEventListener('click', function () {
+                    if (topbar.classList.contains('menu-open')) {
+                        topbar.classList.remove('menu-open');
+                    } else {
+                        topbar.classList.remove('nav-hidden');
+                        topbar.classList.add('menu-open');
+                    }
+                });
+            }
+
+            // 点击导航：1) 收起手机菜单 2) 整排导航轻微呼吸一次
+            if (navLinks) {
+                navLinks.addEventListener('click', function (e) {
+                    if (e.target && e.target.tagName.toLowerCase() === 'a') {
+                        topbar.classList.remove('menu-open');
+
+                        // 触发“整排导航呼吸一次”（幅度克制）
+                        navLinks.classList.remove('nav-breath');
+                        // 重新触发动画
+                        void navLinks.offsetWidth;
+                        navLinks.classList.add('nav-breath');
+                        setTimeout(function () {
+                            navLinks.classList.remove('nav-breath');
+                        }, 1100);
+                    }
+                });
+            }
+
+            window.addEventListener('scroll', handleScroll, { passive: true });
+            window.addEventListener('mousemove', handleMouseMove);
+            handleScroll();
+        })();
+    </script>
 </body>
 </html>
