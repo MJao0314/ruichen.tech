@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>锐宸科技 Ruichen.Tech | 企业官网</title>
+    <title>锐宸科技 Ruichen.Tech</title>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
         html { scroll-behavior: smooth; }
@@ -11,34 +11,51 @@
         body {
             font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, Arial, sans-serif;
             line-height: 1.8;
-            /* 分层的深紫 / 深蓝渐变，不是纯黑，也有层次 */
+
+            /* 更亮更有层次：紫/蓝为主，加入少量蓝绿光晕，但把亮区放到边缘，避免压字 */
             background:
-                radial-gradient(circle at 12% 0%, #3b2468 0, #120a2b 38%, #050716 85%),
-                radial-gradient(circle at 88% 110%, #2c1b55 0, #090715 40%, #040511 100%);
+                radial-gradient(circle at 12% -10%, rgba(168, 85, 247, 0.55) 0, rgba(88, 28, 135, 0.22) 32%, rgba(5, 7, 22, 0) 62%),
+                radial-gradient(circle at 92% 8%, rgba(59, 130, 246, 0.42) 0, rgba(37, 99, 235, 0.18) 28%, rgba(5, 7, 22, 0) 58%),
+                radial-gradient(circle at 88% 112%, rgba(34, 211, 238, 0.20) 0, rgba(20, 184, 166, 0.10) 24%, rgba(5, 7, 22, 0) 58%),
+                radial-gradient(circle at 8% 112%, rgba(99, 102, 241, 0.22) 0, rgba(30, 58, 138, 0.10) 26%, rgba(5, 7, 22, 0) 60%),
+                linear-gradient(180deg, #141336 0%, #0b0e24 45%, #07081a 100%);
+
             color: #e5e7eb;
             position: relative;
             overflow-x: hidden;
         }
 
-        /* 轻微噪点/星点层 */
+        /* 轻微噪点/星点层（保留但稍减） */
         body::before {
             content: "";
             position: fixed;
             inset: 0;
             pointer-events: none;
             background-image:
-                radial-gradient(#ffffff15 1px, transparent 1px),
-                radial-gradient(#ffffff0d 1px, transparent 1px);
-            background-size: 160px 160px, 260px 260px;
-            background-position: 0 0, 80px 100px;
+                radial-gradient(#ffffff14 1px, transparent 1px),
+                radial-gradient(#ffffff0b 1px, transparent 1px);
+            background-size: 170px 170px, 280px 280px;
+            background-position: 0 0, 90px 110px;
             mix-blend-mode: screen;
-            opacity: 0.36;
+            opacity: 0.30;
+            z-index: -1;
+        }
+
+        /* 文字可读性：在内容主要区域做轻微暗化“幕布”，避免光晕压字 */
+        body::after {
+            content: "";
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            background:
+                radial-gradient(circle at 50% 18%, rgba(0,0,0,0.30) 0, rgba(0,0,0,0.52) 55%, rgba(0,0,0,0.72) 100%);
+            opacity: 0.55;
             z-index: -1;
         }
 
         .page {
             min-height: 100vh;
-            padding: 88px 24px 60px;
+            padding: 86px 24px 60px;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -57,18 +74,40 @@
             transform: translateX(-50%);
             width: 100%;
             max-width: 1200px;
-            padding: 10px 20px 10px;
+
+            /* 导航更短一点 */
+            padding: 8px 18px 8px;
+
             z-index: 1000;
             transition: transform 0.25s ease, opacity 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
             border-radius: 0 0 18px 18px;
-            background: rgba(10, 12, 26, 0.96);
+
+            /* 不要太黑：磨砂玻璃 + 微渐变 */
+            background: linear-gradient(180deg, rgba(26, 28, 58, 0.62), rgba(12, 14, 36, 0.76));
             box-shadow:
-                0 16px 48px rgba(0,0,0,0.85),
-                0 0 0 1px rgba(55,65,81,0.9);
+                0 16px 48px rgba(0,0,0,0.65),
+                0 0 0 1px rgba(255,255,255,0.08);
             backdrop-filter: blur(18px);
         }
 
+        .topbar::before{
+            content:"";
+            position:absolute;
+            inset:0;
+            border-radius: inherit;
+            pointer-events:none;
+            background: linear-gradient(120deg,
+                rgba(255,255,255,0.10),
+                rgba(255,255,255,0.02),
+                rgba(34,211,238,0.06),
+                rgba(255,255,255,0.04));
+            opacity: 0.55;
+            mix-blend-mode: screen;
+        }
+
         .topbar-inner {
+            position: relative;
+            z-index: 1;
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -86,37 +125,46 @@
             gap: 10px;
         }
 
+        /* RC 图标更“高级”，做内层光泽滑过（不闪边框） */
         .brand-logo {
             position: relative;
             width: 36px;
             height: 36px;
             border-radius: 12px;
             background:
-                radial-gradient(circle at 20% 0%, #f9fafb 0, #18122f 55%, #050716 100%);
+                radial-gradient(circle at 18% 0%, rgba(255,255,255,0.85) 0, rgba(67,56,202,0.35) 22%, rgba(7,8,26,0.95) 78%);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 16px;
-            font-weight: 600;
+            font-size: 15px;
+            font-weight: 700;
+            letter-spacing: 0.06em;
             color: #f9fafb;
             box-shadow:
-                0 16px 40px rgba(0,0,0,0.9),
-                0 0 0 1px rgba(148,163,184,0.7);
+                0 16px 38px rgba(0,0,0,0.75),
+                0 0 0 1px rgba(255,255,255,0.10);
             overflow: hidden;
         }
 
-        .brand-logo::before {
-            content: "";
-            position: absolute;
-            inset: 2px;
-            border-radius: inherit;
-            background:
-                linear-gradient(135deg,
-                    rgba(249,250,251,0.18),
-                    rgba(15,23,42,1),
-                    rgba(156,163,175,0.3));
-            mix-blend-mode: soft-light;
-            opacity: 0.9;
+        .brand-logo::after{
+            content:"";
+            position:absolute;
+            top:-30%;
+            left:-60%;
+            width: 60%;
+            height: 160%;
+            background: linear-gradient(90deg, rgba(255,255,255,0), rgba(255,255,255,0.22), rgba(255,255,255,0));
+            transform: rotate(18deg);
+            animation: logoSheen 4.8s ease-in-out infinite;
+            opacity: 0.55;
+            mix-blend-mode: screen;
+        }
+
+        @keyframes logoSheen{
+            0%   { transform: translateX(0) rotate(18deg); opacity: 0.0; }
+            20%  { opacity: 0.55; }
+            55%  { opacity: 0.40; }
+            100% { transform: translateX(260%) rotate(18deg); opacity: 0.0; }
         }
 
         .brand-logo span {
@@ -124,33 +172,44 @@
             z-index: 1;
         }
 
+        /* “锐宸科技”更大气 */
         .brand-text-main {
-            font-size: 20px;
-            font-weight: 600;
-            letter-spacing: 0.18em;
+            font-size: 22px;
+            font-weight: 650;
+            letter-spacing: 0.20em;
         }
 
         .brand-text-sub {
             font-size: 12px;
-            opacity: 0.7;
-            color: #9ca3af;
+            opacity: 0.78;
+            color: #c7d2fe;
         }
 
         /* 桌面导航 */
         .nav-links {
             display: flex;
-            gap: 24px;
+            gap: 22px;
             font-size: 14px;
-            font-weight: 500;
+            font-weight: 520;
         }
 
         .nav-links a {
             text-decoration: none;
-            color: #e5e7eb;
-            opacity: 0.84;
+            color: #eef2ff;
+            opacity: 0.86;
             position: relative;
             padding-bottom: 2px;
             letter-spacing: 0.12em;
+            text-transform: uppercase;
+
+            /* 让导航“全体文字小幅呼吸一次”（页面加载时） */
+            animation: navBreath 1.9s ease-in-out 1;
+        }
+
+        @keyframes navBreath{
+            0%   { opacity: 0.82; text-shadow: 0 0 0 rgba(199,210,254,0); }
+            45%  { opacity: 1;    text-shadow: 0 0 14px rgba(199,210,254,0.55); }
+            100% { opacity: 0.86; text-shadow: 0 0 0 rgba(199,210,254,0); }
         }
 
         .nav-links a::after {
@@ -160,7 +219,7 @@
             bottom: -3px;
             width: 0;
             height: 1px;
-            background: linear-gradient(90deg, #e5e7eb, #a5b4fc);
+            background: linear-gradient(90deg, #e5e7eb, #a5b4fc, #67e8f9);
             transition: width 0.22s ease;
         }
 
@@ -178,17 +237,18 @@
             width: 32px;
             height: 32px;
             border-radius: 999px;
-            border: 1px solid rgba(148,163,184, 0.6);
-            background: radial-gradient(circle at 0% 0%, #1e1638 0, #050716 85%);
+            border: 1px solid rgba(255,255,255, 0.14);
+            background: linear-gradient(180deg, rgba(26,28,58,0.65), rgba(10,12,26,0.80));
             align-items: center;
             justify-content: center;
             cursor: pointer;
+            backdrop-filter: blur(14px);
         }
         .menu-toggle span {
             display: block;
             width: 16px;
             height: 2px;
-            background: #e5e7eb;
+            background: #eef2ff;
             position: relative;
         }
         .menu-toggle span::before,
@@ -198,146 +258,120 @@
             left: 0;
             width: 16px;
             height: 2px;
-            background: #e5e7eb;
+            background: #eef2ff;
         }
-        .menu-toggle span::before {
-            top: -5px;
-        }
-        .menu-toggle span::after {
-            top: 5px;
-        }
+        .menu-toggle span::before { top: -5px; }
+        .menu-toggle span::after  { top: 5px; }
 
         .topbar.menu-open {
             box-shadow:
-                0 24px 70px rgba(0,0,0,0.95),
-                0 0 0 1px rgba(55,65,81,1);
+                0 24px 70px rgba(0,0,0,0.75),
+                0 0 0 1px rgba(255,255,255,0.10);
         }
 
         .topbar.menu-open .nav-links {
             display: flex;
         }
 
-        /* Hero：简洁抬头 */
+        /* Hero：简洁抬头（文案改） */
         .hero {
             padding: 56px 0 64px;
-            border-bottom: 1px solid rgba(31,41,55,0.8);
+            border-bottom: 1px solid rgba(255,255,255,0.10);
         }
 
         .hero-inner {
-            max-width: 860px;
+            max-width: 880px;
         }
 
         .hero-tag {
             display: inline-flex;
             align-items: center;
-            padding: 3px 11px;
+            padding: 4px 12px;
             border-radius: 999px;
-            border: 1px solid rgba(156,163,175,0.7);
-            background: rgba(15,23,42,0.78);
+            border: 1px solid rgba(255,255,255,0.14);
+            background: rgba(16, 18, 48, 0.55);
             font-size: 12px;
             color: #e5e7eb;
             margin-bottom: 18px;
+            letter-spacing: 0.06em;
         }
 
         .hero-title {
-            font-size: 30px;
-            font-weight: 600;
+            font-size: 32px;
+            font-weight: 650;
             letter-spacing: 0.06em;
             margin-bottom: 18px;
-            color: #f9fafb;
+            color: #ffffff;
         }
 
         .hero-subtitle {
             font-size: 15px;
-            color: #d1d5db;
-            max-width: 760px;
+            color: #e5e7eb;
+            max-width: 780px;
+            opacity: 0.92;
         }
 
-        main {
-            padding-top: 14px;
-        }
+        main { padding-top: 14px; }
 
         section[id] {
             position: relative;
             padding: 56px 0;
-            border-bottom: 1px solid rgba(31,41,55,0.9);
-        }
-
-        section[id]:last-of-type {
-            border-bottom: none;
-        }
-
-        /* 锚点偏移 */
-        section[id] {
+            border-bottom: 1px solid rgba(255,255,255,0.10);
             scroll-margin-top: 120px;
         }
 
-        /* 锚点高亮：标题“呼吸”一次 */
+        section[id]:last-of-type { border-bottom: none; }
+
+        /* 点击导航后：标题“呼吸”一次（保留，但整体更干净） */
         section[id]:target .section-title {
-            animation: titleBreath 1.4s ease-out;
+            animation: titleBreath 1.25s ease-out;
         }
 
         @keyframes titleBreath {
-            0% {
-                transform: scale(1);
-                text-shadow: 0 0 0 rgba(199,210,254,0);
-                color: #f9fafb;
-            }
-            35% {
-                transform: scale(1.06);
-                text-shadow: 0 0 18px rgba(199,210,254,0.9);
-                color: #ffffff;
-            }
-            70% {
-                transform: scale(1.02);
-                text-shadow: 0 0 8px rgba(199,210,254,0.5);
-                color: #e5e7eb;
-            }
-            100% {
-                transform: scale(1);
-                text-shadow: 0 0 0 rgba(199,210,254,0);
-                color: #f9fafb;
-            }
+            0%   { transform: scale(1);    text-shadow: 0 0 0 rgba(199,210,254,0);   color: #ffffff; }
+            40%  { transform: scale(1.06); text-shadow: 0 0 18px rgba(199,210,254,0.85); color: #ffffff; }
+            75%  { transform: scale(1.02); text-shadow: 0 0 10px rgba(103,232,249,0.35); color: #eef2ff; }
+            100% { transform: scale(1);    text-shadow: 0 0 0 rgba(199,210,254,0);   color: #ffffff; }
         }
 
-        .section-headline {
-            margin-bottom: 18px;
-        }
+        .section-headline { margin-bottom: 18px; }
 
         .section-title {
             font-size: 20px;
-            font-weight: 600;
+            font-weight: 650;
             letter-spacing: 0.16em;
             text-transform: uppercase;
-            color: #f9fafb;
+            color: #ffffff;
             margin-bottom: 6px;
         }
 
+        /* 四个导航内容下面的小字：更专业、更简洁 */
         .section-subtitle {
             font-size: 13px;
-            color: #9ca3af;
+            color: #c7d2fe;
+            opacity: 0.78;
         }
 
         .section-body {
             font-size: 15px;
             color: #e5e7eb;
-            max-width: 900px;
+            max-width: 920px;
+            opacity: 0.92;
         }
 
-        .section-body p + p {
-            margin-top: 10px;
-        }
+        .section-body p + p { margin-top: 10px; }
 
         .biz-layout {
             display: grid;
-            grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.9fr);
+            grid-template-columns: minmax(0, 1.05fr) minmax(0, 1.95fr);
             gap: 32px;
             align-items: flex-start;
         }
 
         .biz-label {
             font-size: 13px;
-            color: #9ca3af;
+            color: #c7d2fe;
+            opacity: 0.75;
         }
 
         .biz-items {
@@ -345,37 +379,28 @@
             color: #e5e7eb;
         }
 
-        .biz-item {
-            margin-bottom: 18px;
-        }
+        .biz-item { margin-bottom: 18px; }
 
         .biz-name {
-            font-weight: 600;
+            font-weight: 650;
             margin-bottom: 4px;
+            color: #ffffff;
         }
 
         .biz-desc {
-            color: #d1d5db;
+            color: #e5e7eb;
+            opacity: 0.90;
         }
 
         /* 联系方式 */
-        .contact-lines {
-            font-size: 15px;
-            color: #e5e7eb;
-        }
-
-        .contact-lines p {
-            margin-bottom: 10px;
-        }
+        .contact-lines { font-size: 15px; color: #e5e7eb; }
+        .contact-lines p { margin-bottom: 10px; }
 
         .contact-lines a {
             color: #e5e7eb;
             text-decoration: none;
         }
-
-        .contact-lines a:hover {
-            text-decoration: underline;
-        }
+        .contact-lines a:hover { text-decoration: underline; }
 
         .contact-row {
             display: flex;
@@ -385,70 +410,55 @@
             margin-top: 6px;
         }
 
-        .contact-row span {
-            flex: 1;
-        }
+        .contact-row span { flex: 1; }
 
         .contact-link {
             font-size: 13px;
-            color: #9ca3af;
+            color: #c7d2fe;
             text-decoration: none;
             white-space: nowrap;
+            opacity: 0.82;
         }
-
-        .contact-link:hover {
-            text-decoration: underline;
-        }
+        .contact-link:hover { text-decoration: underline; opacity: 1; }
 
         footer {
             margin-top: 32px;
             font-size: 12px;
-            color: #6b7280;
+            color: #a5b4fc;
+            opacity: 0.60;
             text-align: center;
         }
 
         /* 响应式 */
         @media (max-width: 900px) {
-            .hero {
-                padding-top: 40px;
-            }
+            .hero { padding-top: 40px; }
         }
 
         @media (max-width: 768px) {
-            .page {
-                padding: 76px 14px 40px;
-            }
-            .topbar {
-                padding-inline: 16px;
-                border-radius: 0 0 14px 14px;
-            }
-            .menu-toggle {
-                display: flex;
-            }
+            .page { padding: 76px 14px 40px; }
+            .topbar { padding-inline: 14px; border-radius: 0 0 14px 14px; }
+            .menu-toggle { display: flex; }
+
             .nav-links {
                 display: none;
                 position: absolute;
-                right: 16px;
+                right: 14px;
                 top: 100%;
                 margin-top: 10px;
                 flex-direction: column;
                 gap: 10px;
-                background: rgba(10,12,26,0.98);
+                background: linear-gradient(180deg, rgba(26,28,58,0.70), rgba(10,12,26,0.86));
                 padding: 10px 14px;
                 border-radius: 14px;
                 box-shadow:
-                    0 20px 60px rgba(0,0,0,0.95),
-                    0 0 0 1px rgba(31,41,55,1);
+                    0 20px 60px rgba(0,0,0,0.75),
+                    0 0 0 1px rgba(255,255,255,0.10);
+                backdrop-filter: blur(16px);
             }
-            .topbar.menu-open .nav-links {
-                display: flex;
-            }
-            .hero-title {
-                font-size: 24px;
-            }
-            .biz-layout {
-                grid-template-columns: minmax(0, 1fr);
-            }
+            .topbar.menu-open .nav-links { display: flex; }
+
+            .hero-title { font-size: 26px; }
+            .biz-layout { grid-template-columns: minmax(0, 1fr); }
         }
     </style>
 </head>
@@ -479,18 +489,14 @@
 <div class="page">
     <div class="shell">
 
-        <!-- Hero：简洁抬头 -->
+        <!-- Hero：文案改（不提轻量/不提不打扰/不提小团队） -->
         <section class="hero">
             <div class="hero-inner">
-                <div class="hero-tag">
-                    信息系统与智能工具结合的轻量服务团队
-                </div>
-                <h1 class="hero-title">
-                    帮你把信息、工具和实际业务，接成一条更顺的路。
-                </h1>
+                <div class="hero-tag">AI workflow · 工具集成 · 模型生态更新</div>
+                <h1 class="hero-title">让 AI 走进业务：落地更快，迭代更稳。</h1>
                 <p class="hero-subtitle">
-                    武汉锐宸科技有限公司位于武汉西北湖金融商圈，专注于信息梳理、流程设计与智能工具落地，
-                    在不打扰日常节奏的前提下，帮助企业和专业个体把关键节点做得更清楚、更稳妥。
+                    我们围绕主流模型与工具链，为企业与项目团队提供选型、接入与应用方案，打通知识、流程与协作。
+                    长期跟进主流模型生态更新，持续优化效果、成本与可维护性。
                 </p>
             </div>
         </section>
@@ -500,16 +506,14 @@
             <section id="company">
                 <div class="section-headline">
                     <div class="section-title">公司简介</div>
-                    <div class="section-subtitle">信息系统与智能工具结合的服务提供方</div>
+                    <div class="section-subtitle">AI 工具与应用落地服务</div>
                 </div>
                 <div class="section-body">
                     <p>
-                        锐宸科技是一家专注于“信息 + 工具 + 落地”的服务公司，围绕具体业务场景，
-                        为企业管理者、项目负责人和专业个体提供信息梳理、决策支持与工具配置。
+                        武汉锐宸科技有限公司位于武汉西北湖国金中心，聚焦 AI 工具接入与业务融合，提供可交付、可复用、可迭代的落地支持。
                     </p>
                     <p>
-                        我们不做空泛的大规划，更关注：当下手头这个项目，该如何把信息理清，
-                        把流程捋顺，把合适的工具接上去，让团队可以更安静地把事推进下去。
+                        我们把“模型能力”转成“工作方式”：从信息体系到流程协作，从知识资产到工具集成，帮助团队在关键项目中更快形成产出闭环。
                     </p>
                 </div>
             </section>
@@ -518,19 +522,14 @@
             <section id="about">
                 <div class="section-headline">
                     <div class="section-title">关于我们</div>
-                    <div class="section-subtitle">方法论清楚，协作方式简单</div>
+                    <div class="section-subtitle">方法清晰 · 交付可控</div>
                 </div>
                 <div class="section-body">
                     <p>
-                        团队成员长期在一线业务和个人服务场景中工作，对“信息太杂、沟通成本高、工具用不起来”这些常见问题，会先从拆解和排序开始，而不是一上来堆概念。
+                        我们以需求拆解为起点，结合 RAG（检索增强）与 SOP（流程固化），把模型能力接入到你的真实业务流程中。
                     </p>
                     <p>
-                        在合作中，我们更看重几件事：
-                    </p>
-                    <p>
-                        · 把“事实、判断、假设”拆开说清楚，避免混在一起决策；<br>
-                        · 重视节奏和可执行性，而不是只停留在方案文档里；<br>
-                        · 预先说明边界与预期，让每一方都清楚这段合作能解决什么、不能解决什么。
+                        交付强调三件事：可维护、可扩展、可持续迭代；避免“一次性演示”，确保长期可用。
                     </p>
                 </div>
             </section>
@@ -539,37 +538,48 @@
             <section id="business">
                 <div class="section-headline">
                     <div class="section-title">业务板块</div>
-                    <div class="section-subtitle">围绕信息与智能工具的三个主要方向</div>
+                    <div class="section-subtitle">工具接入 · 数据模型 · 组织效率</div>
                 </div>
                 <div class="section-body">
                     <div class="biz-layout">
                         <div class="biz-label">
-                            当前，我们主要在这些方向上提供中长期支持，并长期跟进主流模型生态更新。
+                            覆盖多行业场景，按项目提供方案设计、实施与持续优化；长期跟进主流模型生态更新。
                         </div>
                         <div class="biz-items">
                             <div class="biz-item">
-                                <div class="biz-name">信息梳理与决策支持</div>
-                                <div class="biz-desc">
-                                    针对复杂项目、跨部门协作或长期输出场景，对分散的信息进行结构化整理，
-                                    提炼关键问题和决策节点，让后续沟通建立在同一底层事实之上。
-                                </div>
+                                <div class="biz-name">主流模型与工具链接入</div>
+                                <div class="biz-desc">账号体系、权限策略、使用规范与工具组合，确保可控且可规模化落地。</div>
                             </div>
                             <div class="biz-item">
-                                <div class="biz-name">流程设计与协作优化</div>
-                                <div class="biz-desc">
-                                    从实际工作流程出发，对关键步骤、角色边界和交付节奏做重新设计，
-                                    配合简单清晰的协作规范，减少反复沟通和“隐性成本”。
-                                </div>
+                                <div class="biz-name">知识库与检索体系（RAG）</div>
+                                <div class="biz-desc">资料结构化、检索策略与引用规范，让知识可查、可用、可追溯。</div>
                             </div>
                             <div class="biz-item">
-                                <div class="biz-name">智能工具选型与集成</div>
-                                <div class="biz-desc">
-                                    结合主流 AI 与 SaaS 工具，为客户搭建适配的“工作台”——包括知识库、
-                                    任务流、自动化小流程等，强调可维护和可持续使用，而不是一次性展示。
-                                </div>
+                                <div class="biz-name">流程与自动化（SOP）</div>
+                                <div class="biz-desc">把关键环节固化为可执行流程，减少重复沟通与协作摩擦，提升交付稳定性。</div>
+                            </div>
+                            <div class="biz-item">
+                                <div class="biz-name">信息共享与管理支持</div>
+                                <div class="biz-desc">模板体系、任务追踪与数据看板，帮助管理与执行建立同一套信息底座。</div>
                             </div>
                         </div>
                     </div>
+                </div>
+            </section>
+
+            <!-- 旗下品牌（不进导航，仅用于“本页跳转”） -->
+            <section id="brand">
+                <div class="section-headline">
+                    <div class="section-title">旗下品牌</div>
+                    <div class="section-subtitle">品牌矩阵与业务延展</div>
+                </div>
+                <div class="section-body">
+                    <p>
+                        云在（Yunzai）为旗下品牌站点，用于承载特定方向的内容与产品呈现。
+                    </p>
+                    <p style="opacity:0.78; color:#c7d2fe; font-size:13px; letter-spacing:0.06em;">
+                        访问地址：yunzai.ruichen.tech
+                    </p>
                 </div>
             </section>
 
@@ -577,7 +587,7 @@
             <section id="contact">
                 <div class="section-headline">
                     <div class="section-title">联系我们</div>
-                    <div class="section-subtitle">当你有具体项目或想法需要落地时</div>
+                    <div class="section-subtitle">合作对接与方案沟通</div>
                 </div>
                 <div class="section-body">
                     <div class="contact-lines">
@@ -591,10 +601,8 @@
                         </p>
                         <div class="contact-row">
                             <span><strong>地址：</strong>武汉 · 西北湖 · 国金中心</span>
-                            <!-- 这里改动：去掉 target="_blank"、rel，改为当前页直接跳转 -->
-                            <a href="https://yunzai.ruichen.tech" class="contact-link">
-                                查看旗下品牌「云在」
-                            </a>
+                            <!-- 本页跳转：不进入第二个网址 -->
+                            <a href="#brand" class="contact-link">查看旗下品牌「云在」</a>
                         </div>
                     </div>
                 </div>
